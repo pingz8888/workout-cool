@@ -196,7 +196,7 @@ export function WorkoutSessionSets({
                   )}
                 >
                   <span className="text-xl leading-[1.3] flex-1">{exerciseName}</span>
-                  {details?.introduction && (
+                  {(details?.introduction || details?.description) && (
                     <span
                       className="flex text-xs mt-1 text-slate-500 dark:text-slate-400 underline cursor-pointer hover:text-blue-600"
                       onClick={(e) => {
@@ -209,8 +209,8 @@ export function WorkoutSessionSets({
                   )}
                 </div>
               </div>
-              {/* Modale vidéo */}
-              {details && details.fullVideoUrl && videoModal.open && videoModal.exerciseId === ex.id && (
+              {/* Modale vidéo — always render so instructions are accessible even without video */}
+              {details && videoModal.open && videoModal.exerciseId === ex.id && (
                 <ExerciseVideoModal
                   exercise={details}
                   onOpenChange={(open) => setVideoModal({ open, exerciseId: open ? ex.id : undefined })}

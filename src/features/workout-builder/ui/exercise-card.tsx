@@ -63,7 +63,7 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
                 </div>
               </>
             ) : (
-              <div className="h-full flex items-center justify-center">
+              <div className="h-full flex items-center justify-center cursor-pointer" onClick={handlePlayVideo}>
                 <div className="text-slate-400 dark:text-slate-500">
                   <Target className="h-12 w-12" />
                 </div>
@@ -171,8 +171,8 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
           </div>
         </CardContent>
       </Card>
-      {/* Video Modal */}
-      {exercise.fullVideoUrl && <ExerciseVideoModal exercise={exercise} onOpenChange={setShowVideo} open={showVideo} />}
+      {/* Video Modal — always render so instructions are accessible even without video */}
+      <ExerciseVideoModal exercise={exercise} onOpenChange={setShowVideo} open={showVideo} />
     </TooltipProvider>
   );
 }

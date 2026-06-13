@@ -193,7 +193,7 @@ export const ExerciseListItem = React.memo(function ExerciseListItem({
             <Trash2 className="h-4 w-4" />
           </button>
 
-          {exercise.fullVideoUrl && <ExerciseVideoModal defaultTab={modalTab} exercise={exercise} onOpenChange={playVideo.toggle} open={playVideo.value} />}
+          <ExerciseVideoModal defaultTab={modalTab} exercise={exercise} onOpenChange={playVideo.toggle} open={playVideo.value} />
         </>
       )}
     </div>
