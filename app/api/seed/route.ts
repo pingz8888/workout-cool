@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ExerciseAttributeNameEnum, ExerciseAttributeValueEnum, PrismaClient } from "@prisma/client";
+import { csvExercises } from "../../../scripts/csv-exercises-data";
 
 const prisma = new PrismaClient();
 
@@ -128,7 +129,7 @@ interface ExerciseTemplate {
   nameEn: string;
   nameFr: string;
   primaryMuscle: Muscle;
-  secondaryMuscles: Muscle[];
+  secondaryMuscles?: Muscle[];
   equipment: Equip[];
   mechanicsType: MechType;
   exerciseType: ExerciseType;
@@ -542,7 +543,7 @@ export async function GET(request: Request) {
           attributes: [
             { attributeName: "TYPE", attributeValue: template.exerciseType },
             { attributeName: "PRIMARY_MUSCLE", attributeValue: template.primaryMuscle },
-            ...template.secondaryMuscles.map(m => ({ attributeName: "SECONDARY_MUSCLE", attributeValue: m })),
+            ...(template.secondaryMuscles || []).map(m => ({ attributeName: "SECONDARY_MUSCLE", attributeValue: m })),
             { attributeName: "EQUIPMENT", attributeValue: equip },
             { attributeName: "MECHANICS_TYPE", attributeValue: template.mechanicsType },
           ],
@@ -625,16 +626,95 @@ export async function GET(request: Request) {
       }
     }
 
+    logs.push(`Template exercises: Imported ${imported}, Errors ${errors}`);
+
+    // Step 4: Insert CSV-sourced exercises
+    logs.push("\nStep 4: Inserting CSV-sourced exercises...");
+    let csvImported = 0;
+    let csvErrors = 0;
+
+    for (const exercise of csvExercises) {
+      try {
+        const slug = exercise.slug || toSlug(exercise.nameEn || exercise.name);
+        const slugEn = exercise.slugEn || toSlug(exercise.nameEn || exercise.name);
+
+        const createdExercise = await prisma.exercise.upsert({
+          where: { slug },
+          update: {
+            name: exercise.name,
+            nameEn: exercise.nameEn,
+            description: exercise.description,
+            descriptionEn: exercise.descriptionEn,
+            fullVideoUrl: exercise.fullVideoUrl,
+            fullVideoImageUrl: exercise.fullVideoImageUrl,
+            introduction: exercise.introduction,
+            introductionEn: exercise.introductionEn,
+            slugEn,
+          },
+          create: {
+            name: exercise.name,
+            nameEn: exercise.nameEn,
+            description: exercise.description,
+            descriptionEn: exercise.descriptionEn,
+            fullVideoUrl: exercise.fullVideoUrl,
+            fullVideoImageUrl: exercise.fullVideoImageUrl,
+            introduction: exercise.introduction,
+            introductionEn: exercise.introductionEn,
+            slug,
+            slugEn,
+          },
+        });
+
+        // Remove old attributes for this exercise
+        await prisma.exerciseAttribute.deleteMany({
+          where: { exerciseId: createdExercise.id },
+        });
+
+        // Create new attributes
+        for (const attr of exercise.attributes) {
+          try {
+            const attributeName = await prisma.exerciseAttributeName.findUnique({
+              where: { name: attr.attributeName as ExerciseAttributeNameEnum },
+            });
+            if (!attributeName) continue;
+
+            const normalizedValue = normalizeAttributeValue(attr.attributeValue);
+            const attributeValue = await prisma.exerciseAttributeValue.findFirst({
+              where: { attributeNameId: attributeName.id, value: normalizedValue },
+            });
+            if (!attributeValue) continue;
+
+            await prisma.exerciseAttribute.create({
+              data: {
+                exerciseId: createdExercise.id,
+                attributeNameId: attributeName.id,
+                attributeValueId: attributeValue.id,
+              },
+            });
+          } catch {
+            // Skip duplicate attributes
+          }
+        }
+
+        csvImported++;
+        logs.push(`  CSV: ${exercise.nameEn || exercise.name}`);
+      } catch (error) {
+        csvErrors++;
+        logs.push(`  CSV Error: ${exercise.nameEn || exercise.name} - ${error}`);
+      }
+    }
+
     const totalExercises = await prisma.exercise.count();
     const totalAttributes = await prisma.exerciseAttribute.count();
 
     logs.push(`\nDone! ${totalExercises} exercises, ${totalAttributes} attributes`);
-    logs.push(`Imported: ${imported}, Errors: ${errors}`);
+    logs.push(`Template: Imported ${imported}, Errors ${errors}`);
+    logs.push(`CSV: Imported ${csvImported}, Errors ${csvErrors}`);
 
     return NextResponse.json({
       status: "success",
       message: `Seeded ${totalExercises} exercises successfully!`,
-      summary: { attributeNames: nameCount, attributeValues: valueCount, exercises: totalExercises, exerciseAttributes: totalAttributes },
+      summary: { attributeNames: nameCount, attributeValues: valueCount, exercises: totalExercises, exerciseAttributes: totalAttributes, templateImported: imported, csvImported },
       logs,
     });
   } catch (error) {
