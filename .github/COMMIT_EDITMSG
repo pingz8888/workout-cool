@@ -1,0 +1,23 @@
+feat: remove all premium/ad gates and prepare for Vercel + Neon deployment
+
+Major changes:
+- Remove all premium gate features (PremiumGate, SessionAccessGuard premium checks, PremiumService, PremiumManager)
+- Remove all ad components (AdWrapper, AdBlockerForPremium, AdSenseAutoAds, RewardedAdGate, sponsor system)
+- Remove payment providers (Stripe, RevenueCat webhooks and API routes)
+- Remove isPremium from Prisma schema, type interfaces, and admin UI
+- Create migration to drop isPremium columns
+- Fix middleware: create middleware.ts re-exporting from proxy.ts
+- Fix security: replace trustedOrigins ['*'] with BETTER_AUTH_URL
+- Add directUrl to Prisma schema for Neon pooled connections
+- Add DIRECT_URL to env validation
+- Make SiteConfig prodUrl/domain dynamic via NEXT_PUBLIC_APP_URL
+- Remove stripe dependency and @better-auth/expo from package.json
+- Remove local IPs from next.config.ts remote patterns
+- Remove public/_ads.txt and ad-related env vars
+- Update service worker version to 1.3.2 and remove /api/stripe skip
+- Clean up .env.example for Vercel + Neon free tier
+- Create vercel.json for function timeout configuration
+- Update sales-terms page description
+- Simplify access-control.ts to auth-only checks
+- Simplify SessionAccessGuard to auth-only checks
+- All features now free for everyone
