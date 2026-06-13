@@ -1,0 +1,9 @@
+{
+  "buildCommand": "prisma migrate deploy && next build",
+  "functions": {
+    "app/api/exercises/[exerciseId]/statistics/**/route.ts": {
+      "maxDuration": 10
+    }
+  },
+  "regions": ["iad1"]
+}
