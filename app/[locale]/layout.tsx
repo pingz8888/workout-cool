@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import { Providers } from "app/[locale]/providers";
 
 import type { ReactNode } from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { cn } from "@/shared/lib/utils";
 import { generateStructuredData, StructuredDataScript } from "@/shared/lib/structured-data";
@@ -14,12 +14,10 @@ import { getLocalizedMetadata } from "@/shared/config/localized-metadata";
 import { WorkoutSessionsSynchronizer } from "@/features/workout-session/ui/workout-sessions-synchronizer";
 import { FavoriteExercisesSynchronizer } from "@/features/workout-builder/model/favorite-exercises-synchronizer";
 import { ThemeSynchronizer } from "@/features/theme/ui/ThemeSynchronizer";
-import { env } from "@/env";
 import { Version } from "@/components/version";
 import { TailwindIndicator } from "@/components/utils/TailwindIndicator";
 import { NextTopLoader } from "@/components/ui/next-top-loader";
 import { ServiceWorkerRegistration } from "@/components/pwa/ServiceWorkerRegistration";
-import { VerticalLeftBanner, VerticalRightBanner, AdBlockerForPremium } from "@/components/ads";
 
 import "@/shared/styles/globals.css";
 
@@ -183,7 +181,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     appleWebApp: {
       capable: true,
-      statusBarStyle: "default",
+      statusBarStyle: "black-translucent",
       title: SiteConfig.title,
     },
     icons: {
@@ -201,6 +199,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
   };
 }
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#FF5722",
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -224,69 +231,19 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ params, children }: RootLayoutProps) {
   const { locale } = await params;
-  // Generate structured data
-  const websiteStructuredData = generateStructuredData({
-    type: "WebSite",
-    locale,
-  });
-
-  const organizationStructuredData = generateStructuredData({
-    type: "Organization",
-    locale,
-  });
-
-  const webAppStructuredData = generateStructuredData({
-    type: "WebApplication",
-    locale,
-  });
+  const websiteStructuredData = generateStructuredData({ type: "WebSite", locale });
+  const organizationStructuredData = generateStructuredData({ type: "Organization", locale });
+  const webAppStructuredData = generateStructuredData({ type: "WebApplication", locale });
 
   return (
     <>
       <html className="h-full" dir="ltr" lang={locale} suppressHydrationWarning>
         <head>
           <meta charSet="UTF-8" />
-          <meta content="width=device-width, initial-scale=1, maximum-scale=1 viewport-fit=cover" name="viewport" />
-          {/* {env.NEXT_PUBLIC_AD_PROVIDER !== "custom" && ( */}
-          <>
-            <meta content={env.NEXT_PUBLIC_AD_CLIENT} name="google-adsense-account" />
-
-            <script
-              async
-              crossOrigin="anonymous"
-              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${env.NEXT_PUBLIC_AD_CLIENT}`}
-            />
-
-            {/* Ezoic Privacy Scripts */}
-            <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
-            <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
-
-            {/* Ezoic Header Script */}
-            <script async src="//www.ezojs.com/ezoic/sa.min.js" />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                    window.ezstandalone = window.ezstandalone || {};
-                    ezstandalone.cmd = ezstandalone.cmd || [];
-                    ezstandalone.cmd.push(function() {
-                      ezstandalone.enable();
-                      ezstandalone.initRewardedAds({
-                        anchor: true,
-                        interstitial: true,
-                        video: true,
-                        sideRails: true
-                      });
-                    });
-                    window.ezRewardedAds = window.ezRewardedAds || {};
-                    window.ezRewardedAds.cmd = window.ezRewardedAds.cmd || [];
-                  `,
-              }}
-            />
-          </>
-          {/* )} */}
 
           {/* PWA Meta Tags */}
           <meta content="yes" name="apple-mobile-web-app-capable" />
-          <meta content="default" name="apple-mobile-web-app-status-bar-style" />
+          <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
           <meta content="Workout Cool" name="apple-mobile-web-app-title" />
           <meta content="yes" name="mobile-web-app-capable" />
           <meta content="#FF5722" name="msapplication-TileColor" />
@@ -294,6 +251,9 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
 
           {/* PWA Manifest */}
           <link href={`/${locale}/manifest.json`} rel="manifest" />
+
+          {/* Apple Touch Icon */}
+          <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 
           <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="preload" />
 
@@ -306,31 +266,6 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
           <link href="https://www.workout.cool/zh-CN" hrefLang="zh-CN" rel="alternate" />
           <link href="https://www.workout.cool" hrefLang="x-default" rel="alternate" />
 
-          {/* Theme color for PWA */}
-          <meta content="#FF5722" name="theme-color" />
-
-          {/* Impact site verification */}
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
-          <meta name="impact-site-verification" value="e6afc3fc-0dcd-4625-a8cd-282991d40164" />
-
-          {/* Google Analytics 4 */}
-          {env.NEXT_PUBLIC_GA4_MEASUREMENT_ID && (
-            <>
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}`} />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}');
-                  `,
-                }}
-              />
-            </>
-          )}
-
           {/* Structured Data */}
           <StructuredDataScript data={websiteStructuredData} />
           <StructuredDataScript data={organizationStructuredData} />
@@ -339,7 +274,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
 
         <body
           className={cn(
-            "flex items-center justify-center min-h-screen w-full max-sm:p-0 max-sm:min-h-full bg-base-200 dark:bg-[#18181b] dark:text-gray-200 antialiased",
+            "flex items-center justify-center min-h-[100dvh] w-full max-sm:p-0 max-sm:min-h-full bg-base-200 dark:bg-[#18181b] dark:text-gray-200 antialiased",
             "bg-hero-light dark:bg-hero-dark",
             GeistMono.variable,
             GeistSans.variable,
@@ -353,19 +288,14 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
             <FavoriteExercisesSynchronizer />
             <WorkoutSessionsSynchronizer />
             <ThemeSynchronizer />
-            {/* <AdSenseAutoAds /> */}
-            <AdBlockerForPremium />
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 
-            <div className="flex items-center justify-center min-h-screen w-full max-sm:min-h-full">
-              <div className="flex items-start gap-2 w-full max-sm:gap-0 justify-center">
-                <VerticalLeftBanner />
-                <div className="min-w-0 sm:min-w-auto w-full sm:w-auto">{children}</div>
-                <VerticalRightBanner />
+            <div className="flex items-center justify-center min-h-[100dvh] w-full max-sm:min-h-full">
+              <div className="min-w-0 sm:min-w-auto w-full sm:w-auto">
+                {children}
               </div>
             </div>
             <Version />
-
             <TailwindIndicator />
           </Providers>
         </body>
