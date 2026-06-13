@@ -48,9 +48,6 @@ export async function ProgramsList() {
                     <div className="font-bold flex items-center gap-2">{program.title}</div>
                     <div className="text-sm opacity-50 line-clamp-2 max-w-xs">{program.description}</div>
                     <div className="flex gap-1 mt-1">
-                      <div className={`badge badge-xs ${program.isPremium ? "badge-primary" : "badge-secondary"}`}>
-                        {program.isPremium ? "Premium" : "Gratuit"}
-                      </div>
                       <div className="badge badge-xs badge-outline">{program.level}</div>
                       <div className="badge badge-xs badge-ghost">{program.category}</div>
                     </div>

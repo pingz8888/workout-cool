@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Lock, Star, Clock, Calendar, Dumbbell } from "lucide-react";
+import { Star, Clock, Calendar, Dumbbell } from "lucide-react";
 import { ExerciseAttributeValueEnum } from "@prisma/client";
 
 import { Locale } from "locales/types";
@@ -17,7 +17,6 @@ interface ProgramCardProps {
 }
 
 export async function ProgramCard({ program, size = "medium", locale }: ProgramCardProps) {
-  const isLocked = program.isPremium;
   const t = await getI18n();
   const title = getProgramTitle(program, locale);
   const description = getProgramDescription(program, locale);
@@ -117,11 +116,6 @@ export async function ProgramCard({ program, size = "medium", locale }: ProgramC
               >
                 {t(`levels.${program.level}` as keyof typeof t)}
               </span>
-              {isLocked && (
-                <span className="bg-yellow-400/90 text-yellow-900 px-2 py-1 sm:px-3 rounded-full text-xs font-semibold border border-yellow-400/40 backdrop-blur-sm shadow-sm">
-                  Premium
-                </span>
-              )}
             </div>
 
             {/* Emoji/Lock */}
@@ -134,20 +128,16 @@ export async function ProgramCard({ program, size = "medium", locale }: ProgramC
                 group-hover:scale-110 transition-transform duration-200
               `}
               >
-                {isLocked ? (
-                  <Lock className="text-slate-600 dark:text-slate-400" size={size === "large" ? 16 : 14} />
-                ) : (
-                  <Image
-                    alt="Emoji"
-                    className={"object-contain w-6 h-6"}
-                    height={size === "large" ? 24 : 20}
-                    loading="lazy"
-                    src={levelConfig.emoji}
-                    width={size === "large" ? 24 : 20}
-                  />
-                )}
+                <Image
+                  alt="Emoji"
+                  className={"object-contain w-6 h-6"}
+                  height={size === "large" ? 24 : 20}
+                  loading="lazy"
+                  src={levelConfig.emoji}
+                  width={size === "large" ? 24 : 20}
+                />
               </div>
-              {!isLocked && <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#25CB78] rounded-full animate-pulse" />}
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#25CB78] rounded-full animate-pulse" />
             </div>
           </div>
         </div>

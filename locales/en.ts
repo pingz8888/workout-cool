@@ -41,12 +41,8 @@ export default {
     "set#one": "set",
     "set#other": "sets",
     error_starting_session: "Error starting session",
-    premium_session: "Premium session",
-    premium_session_description: "This session is part of the premium content. You can see the details but not perform the workout.",
-    premium_session_exercises: "Included exercises",
     workout_description: "Workout description",
     connect_to_access: "Connect to access",
-    become_premium: "Become Premium",
     back_to_program: "Back to program",
     no_equipment: "No equipment",
     workout_programs_title: "Workout programs (+ in progress)",
@@ -71,7 +67,6 @@ export default {
     week: "Week",
     exercises: "exercises",
     min_short: "min",
-    premium: "Premium",
     free: "Free",
     join_cta: "Join the challenge",
     continue: "Continue",
@@ -80,21 +75,15 @@ export default {
     auth_required_description: "You need to sign in to access this workout session.",
     login_to_continue: "Sign In to Continue",
     signup_to_continue: "Sign Up to Continue",
-    premium_required: "Premium Required",
-    upgrade_to_premium: "Upgrade to Premium",
     program_completed: "Program completed",
     check_out_program: "Check out this workout program!",
     share_success: "Shared successfully!",
     copied_to_clipboard: "Link copied!",
     share_failed: "Share failed",
-    premium_required_description: "This is a premium access. Upgrade to access all premium content.",
     important_info: "Important information",
-    donation_teaser:
-      "At first, we were running on donations. But as you can imagine, donations weren't sufficient to cover development and running costs. So we made you a package that will help us keep the lights on and unlock a few superpowers along the way.",
     new: "NEW",
     more_programs_coming_title: "More programs coming soon!",
-    more_programs_coming_description:
-      "We're working hard to create new programs. By upgrading to premium now, you'll have them all automatically. Thanks for your support. 🚀",
+    more_programs_coming_description: "We're working on adding more programs. Stay tuned!",
     coming_strength: "Force & Muscle",
     coming_cardio: "Cardio HIIT",
     coming_yoga: "Yoga & Mobility",
@@ -110,318 +99,6 @@ export default {
       start_button: "Let's go!",
     },
   },
-  premium: {
-    checkout_error: "Error during checkout",
-    premium_required_title: "Premium Required",
-    premium_required_subtitle: "This is a premium access. Upgrade to access all premium content.",
-    premium_required_button: "Upgrade to Premium",
-    already_premium: "You're enjoying Workout.cool Premium",
-    no_ads: "No ads",
-    upgrade: "Upgrade",
-
-    // Checkout
-    checkout: {
-      processing: "Processing...",
-    },
-
-    // Pricing
-    pricing: {
-      month: "month",
-      year: "year",
-      monthly: "Monthly",
-      yearly: "Yearly",
-      discount: "-48%",
-    },
-
-    // Hero Section
-    hero: {
-      badge: "Open-Source & Self-hosting ALWAYS free",
-      title: "Train freely, support the mission",
-      subtitle: "For those who believe in the project and want to (re)believe in themselves with power boosters !",
-      stats: {
-        athletes: {
-          count: "12.4K+",
-          label: "Active athletes",
-        },
-        series: {
-          count: "1.2M+",
-          label: "Series recorded",
-        },
-        rating: {
-          count: "4.9/5",
-          label: "Community rating",
-        },
-        progression: {
-          count: "+23%",
-          label: "Average progression",
-        },
-      },
-    },
-
-    // Mission Banner
-    mission: {
-      supporters_count: "234",
-      supporters_text: "supporters helping the mission",
-      limited: "Limited",
-      early_access: "early access spots",
-    },
-
-    // Plans
-    plans: {
-      monthly: "Monthly",
-      yearly: "Yearly",
-      yearly_discount: "-48%",
-      per_month: "/month",
-      per_year: "/year",
-
-      free: {
-        name: "FREE",
-        price: "€0",
-        period: "/forever",
-        price_label: "€0/forever",
-        badge: "Open-Source • Always Free",
-        description: "All essential functions for training",
-        features: [
-          "Exercise generator",
-          "Exercises with instructions and videos",
-          "GitHub-style workout history (6 months)",
-          "Self-hosting capability",
-          "Open source code access",
-        ],
-        button: "Your actual plan",
-        footer_note: "No signup required • Full access forever",
-      },
-
-      premium: {
-        name: "PREMIUM ⭐",
-        price_label: "€7.90/month or €49/year",
-        badge: "MOST POPULAR • For enthusiasts",
-        description: "All features + early access",
-        footer_monthly: "Join the passionate community! 🔥",
-        footer_yearly: "Thank you for the yearly support! 🙏",
-        yearly_price_note: "/month",
-        features: [
-          "...all of the free plan",
-          "No ads",
-          "Unlimited history (vs 6 months free)",
-          "Progress tracking with advanced statistics (volume, progression, PR)",
-          "Pre-designed training programs",
-          "Private 1:1 chat with a coach",
-          "Early access to new features",
-        ],
-      },
-    },
-
-    // Buttons and Actions
-    actions: {
-      processing: "Processing...",
-      go_premium: "Go Premium",
-      sign_in_continue: "Go Premium",
-      upgrade_now: "Upgrade Now",
-      current_plan: "Your actual plan",
-    },
-
-    // Trust Elements
-    trust: {
-      gdpr_compliant: "100% GDPR compliant",
-      money_back: "30-day money back guarantee",
-      cancel_anytime: "1 click to cancel, no commitment",
-      secure_payment: "100% secure payment via Stripe",
-    },
-
-    // Feature Comparison
-    comparison: {
-      title: "Detailed Feature Comparison",
-      subtitle: "Everything you need to know about what's included in each plan",
-      features_label: "Features",
-      headers: {
-        features: "Features",
-        free: "Free",
-        premium: "Premium",
-      },
-      categories: {
-        equipment: "Equipment & Exercises",
-        tracking: "Tracking & Analytics",
-        programs: "Programs & AI",
-        community: "Community & Sharing",
-        support: "Support & Project",
-      },
-      features: {
-        exercise_library: "Exercise library",
-        custom_exercise: "Custom exercise",
-        video_tutorials: "Video tutorials",
-        workout_history: "Workout history",
-        progress_statistics: "Progress statistics",
-        personal_records: "Personal records tracking",
-        volume_analytics: "Volume & progression analytics",
-        predesigned_programs: "Pre-designed programs",
-        personalized_recommendations: "Personalized recommendations",
-        pro_templates: "Pro templates (Powerlifting, bodybuilding, etc.)",
-        community_access: "Community access",
-        discord_community: "Discord community",
-        private_chat: "Private 1:1 chat with coach",
-        community_support: "Community support",
-        priority_support: "Priority support",
-        early_access: "Early access to features",
-        beta_testing: "Beta testing access",
-      },
-      values: {
-        basic: "Basic",
-        complete: "Complete",
-        unlimited: "Unlimited",
-        professional: "Professional",
-        six_months: "6 months",
-        limited: "Limited",
-        all_programs: "All programs",
-        public: "Public",
-        vip_access: "VIP access",
-        private_channels: "Private channels",
-        soon: "Soon",
-        hd_slowmo: "4K + Slow-mo",
-        early_access: "Early Access",
-      },
-    },
-
-    // FAQ
-    faq: {
-      title: "Frequently Asked Questions",
-      subtitle: "Everything you need to know about Workout.cool and our mission",
-      items: [
-        {
-          question: "Why pay if it's open-source?",
-          answer:
-            "Excellent question! The code will always remain free, but maintaining servers, database and infrastructure costs money. Your contribution helps us keep the tool free for everyone. It's a win-win model: you get premium features, the community keeps free access!",
-        },
-        {
-          question: "Can I self-host Workout.cool?",
-          answer:
-            "Absolutely! The entire codebase is available on GitHub under MIT license. You can deploy it on your own servers, customize it however you want, and use it completely free. Self-hosting gives you full control over your data and workout privacy.",
-        },
-        {
-          question: "Are my workout data secure?",
-          answer:
-            "Yes! We're GDPR compliant, use encrypted connections, and store your data securely. Plus, since we're open-source, you can audit our security practices. You can also export your data anytime or self-host for complete control.",
-        },
-        {
-          question: "Can I cancel my subscription anytime?",
-          answer:
-            "Of course! No contracts, no commitments. Cancel with one click anytime. You'll keep access until your current billing period ends, and you can always restart later. Your workout data remains accessible even if you downgrade to free.",
-        },
-        {
-          question: "Are there exercises for beginners?",
-          answer:
-            "Definitely! Our exercise library covers all fitness levels from complete beginners to advanced athletes. Videos and instructions help beginners find appropriate exercises, and our video tutorials show proper form.",
-        },
-        {
-          question: "How does progress tracking work?",
-          answer:
-            "Every set, rep, weight, and time is automatically logged. You get a GitHub-style workout history showing your consistency, plus detailed analytics on volume, progression, and personal records. Premium users get advanced charts and insights.",
-        },
-        {
-          question: "Can I import data from other apps?",
-          answer:
-            "Soon. We will support CSV imports for basic data (reps & weight). If you're switching from another fitness app, our support team can help migrate your workout history.",
-        },
-        {
-          question: "Does the app work offline?",
-          answer:
-            "The core workout tracking works offline. You can log sets and reps without internet connection for 10 workouts. Exercise videos and cloud sync require internet connection. All your offline data syncs automatically when you're back online.",
-        },
-        {
-          question: "Are there programs for women?",
-          answer:
-            "Absolutely! And there will be more programs in the future. We are working on it. Supporter and Premium plans will include all the future specialized programs for different goals: strength, toning, powerlifting, bodybuilding, and more !",
-        },
-        {
-          question: "Can I create my own programs?",
-          answer: "Unfortunately, no. We are working on it !",
-        },
-      ],
-      additional_support: {
-        title: "Still have questions?",
-        description: "Our fitness-focused community is here to help you succeed",
-        community: "Community support (discord or hello@workout.cool)",
-        discussions: "Open discussions (github/discord)",
-        roadmap: "Transparent roadmap (github)",
-      },
-    },
-
-    // Final CTA
-    final_cta: {
-      motivation: "Keep pushing! 💪",
-      title: "Ready to Support the Mission?",
-      subtitle: "Join thousands of fitness enthusiasts who believe in open-source training freedom",
-      values: [
-        {
-          title: "Community First",
-          description: "Built by and for the fitness community",
-        },
-        {
-          title: "Always Transparent",
-          description: "Open-source code, transparent funding",
-        },
-        {
-          title: "Labor of Love",
-          description: "15 years of passion !",
-        },
-      ],
-      quote: {
-        text: "We believe fitness tools should be accessible to everyone. Your support helps us maintain this vision while continuing to innovate.",
-        author: "— The Workout.cool Team",
-      },
-    },
-
-    // Premium Active State
-    premium_active: {
-      title: "Premium Active! 💪",
-      supporting: "Supporting the mission 💚",
-    },
-
-    // Legacy translations (keeping for compatibility)
-    premium_active_title: "Premium Active",
-    premium_active_subtitle: "All features unlocked",
-    free_intro_title: "You're already getting a lot for free...",
-    free_intro_text:
-      "Workout.cool is a free, open-source fitness app used daily by 60,000+ users. It's built with love (not VC money ^^) and it costs us real time and money to keep it running.",
-    donation_story_text:
-      "At first, we were running on donations. But as you can imagine, donations weren't sufficient to cover development and running costs. So we made you a package that will help us keep the lights on and unlock a few superpowers along the way.",
-    health_upgrade_text: "If Workout.cool helps you level up your health, please consider going Premium :D !",
-    unlock_features_text: "Unlock advanced features & support open-source fitness.",
-    invest_yourself_quote: "Never skimp on fitness & books — invest in yourself !",
-    support_mission: "Support the mission",
-    best_value_badge: "BEST VALUE",
-    annual_plan: "Annual",
-    monthly_plan: "Monthly",
-    discount_badge: "40% off",
-    per_month: "/month",
-    feature_all_programs: "All workout programs",
-    feature_progress_tracking: "Progress tracking",
-    coming_soon: "(soon)",
-    feature_future_updates: "All future programs & updates",
-    feature_priority_support: "Priority support",
-    save_yearly: "Save 40% yearly",
-    processing: "Processing...",
-    cta_annual: "I want to support + save 40%",
-    cta_monthly: "Let's unlock my full plan",
-    thank_supporting: "Thank you for supporting.",
-    no_pressure: "No pressure. You can upgrade anytime.",
-    keep_pushing: "keep pushing ! huhu",
-    still_unsure: "Still not sure? No worries. Workout.cool will always remain free and open-source.",
-    support_helps: "But if you believe in what we're building and you can afford it, your support will help 💚",
-    self_hosting: "Self-hosting",
-    community: "Community",
-    mit_license: "MIT License",
-    pricing_year: "year",
-    pricing_month: "month",
-    conversion_flow_title: "Redirecting...",
-    conversion_flow_message: "Successfully signed in! Redirecting to checkout...",
-    redirecting_to_checkout: "Redirecting to checkout",
-
-    // Premium Gate
-    premium_feature: "Premium Feature",
-    upgrade_to_access_feature: "Upgrade to premium to access this feature",
-    unlock_all_features: "Unlock all features and support development",
-  },
   breadcrumbs: {
     home: "Home",
   },
@@ -432,8 +109,6 @@ export default {
     programs_tooltip: "Browse programs",
     workouts: "Workouts",
     workouts_tooltip: "Create your own workout",
-    premium: "Premium",
-    premium_tooltip: "Upgrade to Premium",
     leaderboard: "Leaderboard",
     leaderboard_tooltip: "View workout rankings",
     tools: "Tools",
@@ -1454,11 +1129,6 @@ export default {
     },
   },
 
-  // Premium Upsell Alert
-  donation_alert: {
-    title: "Unlock advanced features with Workout.cool Premium",
-    or: "or",
-  },
 
   // Donation Modal
   donation_modal: {
@@ -1471,19 +1141,18 @@ export default {
     open_source_title: "100% Open Source",
     open_source_description:
       "This app is completely free, ads free and open source. No profit is generated - it's a passion project to help the community and help people exercise.",
-    no_ads: "No ads",
     no_tracking: "No tracking",
+    no_ads: "No Ads",
     impact_title: "Your impact",
     impact_3_euros: "• Even €3 covers 1 week of server",
     impact_support: "• Your support keeps the app free for everyone",
     impact_footer: "Every donation, even small, makes a real difference! 🙏",
     later_button: "Later",
     support_button: "Support the project",
-    watch_ad: "Watch an ad to support us",
-    or: "or",
+
   },
 
-  // Exercise modal premium teaser
+  // Exercise modal
   exercise_modal: {
     pr_title: "Personal Record Trend",
     unlock_insights: "Unlock Advanced Insights",
@@ -1729,7 +1398,6 @@ export default {
   commons: {
     last_activity: "Last activity",
     registered_on: "Registered on",
-    upgrade_to_premium: "Upgrade to Premium",
     refresh: "Refresh",
     just_now: "just now",
     signup_with: "Sign up with {provider}",
@@ -1831,10 +1499,6 @@ export default {
     back_to_login: "Back to login",
     sending: "Sending...",
     send_me_link: "Send me a link",
-    subscription: "Subscription",
-    manage_subscription: "Manage subscription",
-    become_premium: "Become Premium",
-    remove_ads: "Remove Ads",
     extremely_dissatisfied: "Extremely dissatisfied",
     somewhat_dissatisfied: "Somewhat dissatisfied",
     neutral: "Neutral",
@@ -1843,7 +1507,6 @@ export default {
     change_language: "Change language",
     in_progress: "In progress",
     close: "Close",
-    premium: "Premium",
     free: "Free",
     new: "New",
     coming_soon: "Coming soon",
@@ -1915,23 +1578,10 @@ export default {
     volume_calculation: "Volume = Weight × Reps × Sets",
     last_updated: "Last updated: {date}",
 
-    // Premium
-    premium_required: "Premium required to access statistics",
-
-    // StatisticsPreviewOverlay
-    premium_statistics: "Premium Statistics",
-    premium_statistics_description: "Get detailed insights into your fitness journey with advanced analytics for each exercise.",
     total_volume: "Total Volume",
     pr_increase: "PR Increase",
     weight_progress: "Weight Progress",
-    upgrade_now: "Upgrade Now",
     rating: "4.8/5 rating",
-    no_ads: "No ads",
-    cancel_anytime: "Cancel anytime",
-    preview_notice: "This is just a preview! 👀",
-    preview_description: "Unlock full access to detailed analytics, progress tracking, and personalized insights.",
-    get_premium_access: "Get Premium Access",
-
     // ExercisesBrowser
     all_equipment: "All Equipment",
     all_muscles: "All Muscles",
@@ -1942,6 +1592,14 @@ export default {
     primary_muscle_label: "Primary Muscle:",
     unknown: "Unknown",
     no_image_available: "No image available",
+    premium_statistics: "Premium Statistics",
+    premium_statistics_description: "Unlock advanced analytics and personalized insights to optimize your training.",
+    upgrade_now: "Upgrade Now",
+    no_ads: "No Ads",
+    cancel_anytime: "Cancel anytime",
+    preview_notice: "Preview Mode",
+    preview_description: "This is a preview of the premium statistics feature. Upgrade to access all data.",
+    get_premium_access: "Get Premium Access",
   },
   heatmap: {
     week_days_short: {
@@ -1980,12 +1638,7 @@ export default {
     sponsor_nutripure: "Premium supplements, full transparency",
     sponsor_nutri_and_co: "Nutra as a daily reflex",
     visit_sponsor: "Visit",
-    rewarded_dialog_title: "Ready to train?",
-    rewarded_dialog_subtitle: "Watch a quick ad to unlock your workout : it keeps Workout.cool free for everyone.",
-    rewarded_watch_ad: "Watch Ad & Start",
-    rewarded_or: "or",
-    rewarded_go_premium: "Skip Ads Forever",
-    rewarded_premium_hint: "Premium members never see ads and start instantly",
+
     dialog_title: "Your brand, seen by 657K+ people who train",
     dialog_description:
       "Workout.cool is where fitness enthusiasts come every day to build their sessions. Put your brand in front of them.",
@@ -2002,12 +1655,10 @@ export default {
     top_countries: "Top Countries",
     more_countries: "more",
     similarweb_placeholder: "Traffic share by country — SimilarWeb",
-    pricing_starting_at: "Starting at",
     month: "month",
     feature_logo_link: "Your logo & link on every single page",
     feature_visitors: "304,133 unique visitors see your brand",
     feature_targeted: "70% male, 18-44 — high-intent fitness buyers",
-    feature_premium_placement: "Premium placement: sidebar + in-content banners",
     feature_dofollow: "Dofollow backlink from a high-authority domain — boost your SEO",
     cta_book: "Secure your spot now",
     cta_subtext: "Cancel anytime. Live within 24h of payment.",

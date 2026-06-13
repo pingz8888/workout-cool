@@ -119,7 +119,6 @@ export async function getSessionBySlug(
         slugZhCn: session.slugZhCn,
         equipment: session.equipment,
         estimatedMinutes: session.estimatedMinutes,
-        isPremium: session.isPremium,
         exercises: session.exercises.map((ex) => ({
           id: ex.id,
           sessionId: ex.sessionId,

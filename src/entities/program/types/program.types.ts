@@ -14,7 +14,6 @@ export interface BaseProgram extends I18nText, I18nSlug {
   sessionsPerWeek: number;
   sessionDurationMin: number;
   equipment: ExerciseAttributeValueEnum[];
-  isPremium: boolean;
   visibility: ProgramVisibility;
   isActive: boolean;
   participantCount: number;

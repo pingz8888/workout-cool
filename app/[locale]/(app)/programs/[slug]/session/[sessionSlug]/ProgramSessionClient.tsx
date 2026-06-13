@@ -6,7 +6,7 @@ import { ArrowLeft, Play } from "lucide-react";
 import { ExerciseAttributeNameEnum, ProgramWeek } from "@prisma/client";
 
 import { useCurrentLocale, useI18n } from "locales/client";
-import { canStartSession } from "@/shared/lib/access-control";
+
 import { WorkoutSessionSets } from "@/features/workout-session/ui/workout-session-sets";
 import { WorkoutSessionHeader } from "@/features/workout-session/ui/workout-session-header";
 import { useWorkoutSession } from "@/features/workout-session/model/use-workout-session";
@@ -25,10 +25,9 @@ interface ProgramSessionClientProps {
   week: ProgramWeek;
   session: ProgramSessionWithExercises;
   isAuthenticated: boolean;
-  isPremium: boolean;
 }
 
-export function ProgramSessionClient({ program, week, session, isAuthenticated, isPremium }: ProgramSessionClientProps) {
+export function ProgramSessionClient({ program, week, session, isAuthenticated }: ProgramSessionClientProps) {
   const t = useI18n();
   const locale = useCurrentLocale();
   const router = useRouter();
@@ -45,15 +44,8 @@ export function ProgramSessionClient({ program, week, session, isAuthenticated, 
   const programSlug = getSessionSlug(program, locale);
   const sessionSlug = getSessionSlug(session, locale);
 
-  // Access control context
-  const accessContext = {
-    isAuthenticated,
-    isPremium,
-    isSessionPremium: session.isPremium,
-  };
-
   const handleStartWorkout = async () => {
-    if (!canStartSession(accessContext)) return;
+    if (!isAuthenticated) return;
 
     setIsLoading(true);
     try {
@@ -189,10 +181,10 @@ export function ProgramSessionClient({ program, week, session, isAuthenticated, 
 
   const totalSets = session.exercises.reduce((total, ex) => total + ex.suggestedSets.length, 0);
 
-  // Use access guard to handle authentication and premium restrictions
+  // Use access guard to handle authentication
   return (
     <SessionAccessGuard
-      context={accessContext}
+      isAuthenticated={isAuthenticated}
       programSlug={programSlug}
       sessionDescription={programSessionDescription}
       sessionSlug={sessionSlug}

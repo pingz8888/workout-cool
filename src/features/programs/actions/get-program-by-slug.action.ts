@@ -32,7 +32,6 @@ export interface ProgramDetail {
   sessionsPerWeek: number;
   sessionDurationMin: number;
   equipment: ExerciseAttributeValueEnum[];
-  isPremium: boolean;
   emoji?: string;
   participantCount: number;
   totalEnrollments: number;
@@ -70,7 +69,6 @@ export interface ProgramDetail {
       slugZhCn: string;
       equipment: ExerciseAttributeValueEnum[];
       estimatedMinutes: number;
-      isPremium: boolean;
       totalExercises: number;
     }>;
   }>;
@@ -143,7 +141,6 @@ export async function getProgramBySlug(slug: string): Promise<ProgramDetail | nu
       sessionsPerWeek: program.sessionsPerWeek,
       sessionDurationMin: program.sessionDurationMin,
       equipment: program.equipment,
-      isPremium: program.isPremium,
       participantCount: program.participantCount,
       totalEnrollments: program.enrollments.length,
       coaches: program.coaches.map((coach) => ({
@@ -190,7 +187,6 @@ export async function getProgramBySlug(slug: string): Promise<ProgramDetail | nu
           slugZhCn: session.slugZhCn,
           equipment: session.equipment,
           estimatedMinutes: session.estimatedMinutes,
-          isPremium: session.isPremium,
           totalExercises: session.exercises.length,
         })),
       })),

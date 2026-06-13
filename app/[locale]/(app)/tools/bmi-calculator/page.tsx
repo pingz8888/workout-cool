@@ -5,9 +5,7 @@ import { getI18n } from "locales/server";
 import { BmiEducationalContent } from "app/[locale]/(app)/tools/bmi-calculator/shared/components/BmiEducationalContent";
 import { BmiCalculatorClient } from "app/[locale]/(app)/tools/bmi-calculator/shared/BmiCalculatorClient";
 import { getServerUrl } from "@/shared/lib/server-url";
-import { env } from "@/env";
 import { generateSEOMetadata, SEOScripts } from "@/components/seo/SEOHead";
-import { HorizontalBottomBanner, HorizontalTopBanner } from "@/components/ads";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -91,12 +89,6 @@ export default async function BmiCalculatorPage({ params }: { params: Promise<{ 
         title={t("tools.bmi-calculator-hub.meta.title")}
       />
       <div className="light:bg-white dark:bg-base-200/20">
-        {(env.NEXT_PUBLIC_TOP_BMI_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_BMI_PLACEMENT_ID) && (
-          <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_BMI_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_BMI_PLACEMENT_ID}
-          />
-        )}
         <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-4xl">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8">
@@ -116,12 +108,6 @@ export default async function BmiCalculatorPage({ params }: { params: Promise<{ 
             <BmiEducationalContent />
           </div>
         </div>
-        {(env.NEXT_PUBLIC_BOTTOM_BMI_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_BOTTOM_BMI_PLACEMENT_ID) && (
-          <HorizontalBottomBanner
-            adSlot={env.NEXT_PUBLIC_BOTTOM_BMI_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_BOTTOM_BMI_PLACEMENT_ID}
-          />
-        )}
       </div>
     </>
   );

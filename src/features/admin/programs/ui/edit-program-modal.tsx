@@ -33,7 +33,6 @@ interface EditProgramModalProps {
     sessionsPerWeek: number;
     sessionDurationMin: number;
     equipment: ExerciseAttributeValueEnum[];
-    isPremium: boolean;
     coaches: Array<{
       id: string;
       name: string;
@@ -70,7 +69,6 @@ export function EditProgramModal({ program, open, onOpenChange }: EditProgramMod
     sessionsPerWeek: program.sessionsPerWeek,
     sessionDurationMin: program.sessionDurationMin,
     equipment: program.equipment,
-    isPremium: program.isPremium,
     coaches: program.coaches,
   });
   const [isSaving, setIsSaving] = useState(false);
@@ -456,20 +454,6 @@ export function EditProgramModal({ program, open, onOpenChange }: EditProgramMod
                 );
               })}
             </div>
-          </div>
-
-          {/* Premium */}
-          <div>
-            <label className="label cursor-pointer justify-start gap-2">
-              <input
-                checked={formData.isPremium}
-                className="checkbox"
-                disabled={isSaving}
-                onChange={(e) => setFormData({ ...formData, isPremium: e.target.checked })}
-                type="checkbox"
-              />
-              <span className="label-text">Programme Premium</span>
-            </label>
           </div>
 
           {/* Coachs */}

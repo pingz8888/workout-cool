@@ -6,6 +6,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const { locale } = await params;
   const localizedData = getLocalizedMetadata(locale);
 
+  // Truncate short_name to 12 chars for iOS compatibility
+  const shortName = localizedData.applicationName.length > 12
+    ? localizedData.applicationName.substring(0, 12)
+    : localizedData.applicationName;
+
   const manifest = {
     background_color: "#f3f4f6",
     categories: ["health", "fitness", "sports"],
@@ -26,7 +31,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         src: "/apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "any",
       },
       {
         src: "/android-chrome-192x192.png",
@@ -44,8 +49,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     lang: locale,
     name: localizedData.applicationName,
     orientation: "portrait",
+    prefer_related_applications: false,
     scope: `/${locale}/`,
-    short_name: localizedData.applicationName,
+    short_name: shortName,
     start_url: `/${locale}/`,
     theme_color: "#FF5722",
   };

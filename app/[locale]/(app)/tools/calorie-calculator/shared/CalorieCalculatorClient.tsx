@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { Calculator } from "lucide-react";
 
 import { useI18n } from "locales/client";
-import { env } from "@/env";
-import { HorizontalBottomBanner } from "@/components/ads";
 
 import { BodyFatInput } from "./components/BodyFatInput";
 import {
@@ -97,10 +95,6 @@ export function CalorieCalculatorClient({ config }: CalorieCalculatorClientProps
               <ActivityLevelSelector onChange={setActivityLevel} value={activityLevel} />
               <GoalSelector onChange={setGoal} value={goal} />
             </div>
-
-            {env.NEXT_PUBLIC_BOTTOM_CALORIE_CALCULATOR_AD_SLOT && (
-              <HorizontalBottomBanner adSlot={env.NEXT_PUBLIC_BOTTOM_CALORIE_CALCULATOR_AD_SLOT} />
-            )}
 
             <button
               className={`w-full py-4 px-6 rounded-2xl font-bold text-white transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg flex items-center justify-center gap-3 ${

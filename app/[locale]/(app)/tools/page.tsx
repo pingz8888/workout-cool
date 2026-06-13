@@ -5,8 +5,6 @@ import { Metadata } from "next";
 import { CalculatorIcon, ScaleIcon, HeartIcon, DumbbellIcon, RepeatIcon } from "lucide-react";
 
 import { getI18n } from "locales/server";
-import { env } from "@/env";
-import { HorizontalBottomBanner, HorizontalTopBanner } from "@/components/ads";
 
 interface FitnessTool {
   id: string;
@@ -78,12 +76,6 @@ export default async function ToolsPage() {
 
   return (
     <div className="light:bg-white dark:bg-base-200">
-      {(env.NEXT_PUBLIC_TOP_TOOLS_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_TOOLS_PLACEMENT_ID) && (
-        <HorizontalTopBanner
-          adSlot={env.NEXT_PUBLIC_TOP_TOOLS_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_TOOLS_PLACEMENT_ID}
-        />
-      )}
       <div className="container mx-auto px-4 py-8 sm:py-12">
         <div className="mb-8 sm:mb-12 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-[#4F8EF7] to-[#25CB78] bg-clip-text text-transparent">
@@ -228,14 +220,6 @@ export default async function ToolsPage() {
           })}
         </div>
 
-        {(env.NEXT_PUBLIC_BOTTOM_TOOLS_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_BOTTOM_TOOLS_PLACEMENT_ID) && (
-          <div className="mt-12">
-            <HorizontalBottomBanner
-              adSlot={env.NEXT_PUBLIC_BOTTOM_TOOLS_BANNER_AD_SLOT}
-              ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_BOTTOM_TOOLS_PLACEMENT_ID}
-            />
-          </div>
-        )}
         <div className="mt-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-200/50 backdrop-blur-sm border border-base-content/10">
             <RepeatIcon className="w-5 h-5 text-primary" />

@@ -32,7 +32,6 @@ interface CreateProgramData {
   sessionsPerWeek: number;
   sessionDurationMin: number;
   equipment: ExerciseAttributeValueEnum[];
-  isPremium: boolean;
   emoji?: string;
 
   // Coaches
@@ -100,7 +99,6 @@ export async function createProgram(data: CreateProgramData) {
       sessionsPerWeek: data.sessionsPerWeek,
       sessionDurationMin: data.sessionDurationMin,
       equipment: data.equipment,
-      isPremium: data.isPremium,
       visibility: ProgramVisibility.DRAFT, // Always start as draft
       coaches: {
         create: data.coaches || [],

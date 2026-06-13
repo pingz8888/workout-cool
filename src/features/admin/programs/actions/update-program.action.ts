@@ -29,7 +29,6 @@ interface UpdateProgramData {
   sessionsPerWeek: number;
   sessionDurationMin: number;
   equipment: ExerciseAttributeValueEnum[];
-  isPremium: boolean;
   emoji?: string;
   coaches: Array<{
     id: string;
@@ -106,7 +105,6 @@ export async function updateProgram(programId: string, data: UpdateProgramData) 
           sessionsPerWeek: data.sessionsPerWeek,
           sessionDurationMin: data.sessionDurationMin,
           equipment: data.equipment,
-          isPremium: data.isPremium,
         },
       });
 

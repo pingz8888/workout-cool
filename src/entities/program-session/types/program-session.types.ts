@@ -10,7 +10,6 @@ export interface BaseProgramSession extends I18nText, I18nSlug {
   sessionNumber: number;
   equipment: ExerciseAttributeValueEnum[];
   estimatedMinutes: number;
-  isPremium: boolean;
 }
 
 // Program week type

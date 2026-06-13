@@ -59,9 +59,8 @@ export interface ExerciseStatisticsResponse {
 
 // Error Response Types
 export interface StatisticsErrorResponse {
-  error: "UNAUTHORIZED" | "PREMIUM_REQUIRED" | "INVALID_PARAMETERS" | "INVALID_TIMEFRAME" | "INTERNAL_SERVER_ERROR";
+  error: "UNAUTHORIZED" | "INVALID_PARAMETERS" | "INVALID_TIMEFRAME" | "INTERNAL_SERVER_ERROR";
   message: string;
-  isPremium?: boolean;
   details?: any;
 }
 

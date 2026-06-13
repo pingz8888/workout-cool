@@ -4,7 +4,6 @@ import { useI18n } from "locales/client";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
-import { RewardedAdGate } from "@/components/ads/custom/RewardedAdGate";
 
 export function WorkoutBuilderFooter({
   currentStep,
@@ -46,20 +45,18 @@ export function WorkoutBuilderFooter({
 
           {/* Next/Start Workout button */}
           {isFinalStep && onStartWorkout ? (
-            <RewardedAdGate onRewardGranted={onStartWorkout}>
-              <Button
-                asChild
-                className="flex-1 w-full rounded-full bg-green-600 hover:bg-green-700 min-h-12 dark:bg-green-500 dark:hover:bg-green-600"
-                disabled={!canContinue}
-                size="default"
-                variant="default"
-              >
-                <div className="flex items-center justify-center gap-2">
-                  <Play className="h-4 w-4" />
-                  <span className="font-semibold">{t("workout_builder.navigation.start_workout")}</span>
-                </div>
-              </Button>
-            </RewardedAdGate>
+            <Button
+              className="flex-1 w-full rounded-full bg-green-600 hover:bg-green-700 min-h-12 dark:bg-green-500 dark:hover:bg-green-600"
+              disabled={!canContinue}
+              onClick={onStartWorkout}
+              size="default"
+              variant="default"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <Play className="h-4 w-4" />
+                <span className="font-semibold">{t("workout_builder.navigation.start_workout")}</span>
+              </div>
+            </Button>
           ) : (
             <Button
               className="flex-1 w-full rounded-full bg-blue-600 hover:bg-blue-700 min-h-12 dark:bg-blue-500 dark:hover:bg-blue-600"

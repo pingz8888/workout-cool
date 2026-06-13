@@ -33,7 +33,6 @@ const programSchema = z.object({
   sessionsPerWeek: z.number().min(1, "Au moins 1 séance par semaine"),
   sessionDurationMin: z.number().min(5, "Au moins 5 minutes"),
   equipment: z.array(z.nativeEnum(ExerciseAttributeValueEnum)),
-  isPremium: z.boolean(),
 
   // Step 3: Coaches
   coaches: z.array(
@@ -91,7 +90,6 @@ export function CreateProgramForm({ currentStep, onStepComplete, onSuccess, onCa
       durationWeeks: 4,
       sessionsPerWeek: 3,
       sessionDurationMin: 30,
-      isPremium: true,
       equipment: [],
       coaches: [],
       title: "",
@@ -413,19 +411,6 @@ export function CreateProgramForm({ currentStep, onStepComplete, onSuccess, onCa
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="form-control">
-            <label className="label cursor-pointer justify-start gap-2">
-              <input
-                className="toggle toggle-primary"
-                defaultChecked={true}
-                id="isPremium"
-                onChange={(e) => setValue("isPremium", e.target.checked)}
-                type="checkbox"
-              />
-              <span className="label-text">Programme premium</span>
-            </label>
           </div>
         </div>
       </div>

@@ -30,7 +30,6 @@ interface AddSessionData {
   descriptionZhCn: string;
   equipment: ExerciseAttributeValueEnum[];
   estimatedMinutes: number;
-  isPremium: boolean;
 }
 
 export async function addSessionToWeek(data: AddSessionData) {
@@ -81,7 +80,6 @@ export async function addSessionToWeek(data: AddSessionData) {
       descriptionZhCn: data.descriptionZhCn,
       equipment: data.equipment,
       estimatedMinutes: data.estimatedMinutes,
-      isPremium: data.isPremium,
     },
   });
 

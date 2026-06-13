@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { BarChart3, Crown, Lock, Play, TrendingUp, Zap } from "lucide-react";
+import { BarChart3, Play } from "lucide-react";
 import { useCurrentLocale, useI18n } from "locales/client";
 import { ExerciseAttributeNameEnum, ExerciseAttributeValueEnum } from "@prisma/client";
 
 import type { ExerciseWithAttributes } from "@/entities/exercise/types/exercise.types";
 
 import { getYouTubeEmbedUrl } from "@/shared/lib/youtube";
-import { useIsPremium } from "@/shared/lib/premium/use-premium";
 import { getAttributeValueLabel } from "@/shared/lib/attribute-value-translation";
 import { StatisticsTimeframe } from "@/shared/constants/statistics";
 import { ExerciseCharts } from "@/features/statistics/components/ExerciseStatisticsTab";
@@ -28,8 +26,6 @@ export function ExerciseVideoModal({ open, onOpenChange, exercise, defaultTab = 
   const locale = useCurrentLocale();
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [selectedTimeframe, setSelectedTimeframe] = useState<StatisticsTimeframe>("8weeks");
-  const isPremium = useIsPremium();
-
   useEffect(() => {
     if (open) setActiveTab(defaultTab);
   }, [open, defaultTab]);
@@ -149,63 +145,7 @@ export function ExerciseVideoModal({ open, onOpenChange, exercise, defaultTab = 
                 <ExerciseCharts exerciseId={exercise.id} timeframe={selectedTimeframe} />
               </div>
 
-              {/* Premium teaser — Blurred advanced insights (loss aversion + Zeigarnik effect) */}
-              {!isPremium && (
-                <div className="relative rounded-xl border border-dashed border-amber-300 dark:border-amber-700/50 overflow-hidden">
-                  {/* Blurred fake insights */}
-                  <div className="select-none pointer-events-none blur-[6px] opacity-50 p-4 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-emerald-500" />
-                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{t("exercise_modal.pr_title")}</span>
-                      </div>
-                      <span className="text-lg font-bold text-emerald-500">+12%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-slate-200 dark:bg-slate-700">
-                      <div className="h-2 rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 w-3/4" />
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-2.5 text-center">
-                        <p className="text-[10px] text-slate-400 uppercase tracking-wide">1RM Est.</p>
-                        <p className="font-bold text-slate-700 dark:text-slate-200">85kg</p>
-                      </div>
-                      <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-2.5 text-center">
-                        <p className="text-[10px] text-slate-400 uppercase tracking-wide">Volume</p>
-                        <p className="font-bold text-slate-700 dark:text-slate-200">2,400kg</p>
-                      </div>
-                      <div className="rounded-lg bg-slate-100 dark:bg-slate-800 p-2.5 text-center">
-                        <p className="text-[10px] text-slate-400 uppercase tracking-wide">Sessions</p>
-                        <p className="font-bold text-slate-700 dark:text-slate-200">24</p>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Overlay CTA */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/30 dark:bg-slate-900/30">
-                    <Link
-                      className=" flex flex-col items-center gap-2.5 px-6 py-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-amber-200 dark:border-amber-800 shadow-xl shadow-amber-500/10 hover:shadow-amber-500/25 transition-all duration-200 hover:scale-[1.02]"
-                      href="/premium"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
-                          <Crown className="w-4.5 h-4.5 text-white" />
-                        </div>
-                        <span className="font-bold text-sm text-slate-800 dark:text-slate-100">{t("exercise_modal.unlock_insights")}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-                        <span className="flex items-center gap-1">
-                          <Zap className="w-3 h-3 text-amber-500" />
-                          {t("exercise_modal.feature_pr")}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Lock className="w-3 h-3 text-amber-500" />
-                          {t("exercise_modal.feature_volume")}
-                        </span>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              )}
             </div>
           </TabsContent>
         </Tabs>

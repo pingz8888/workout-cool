@@ -15,12 +15,12 @@ export default async function SalesTermsPage({ params }: PageProps) {
       <div className="container mx-auto max-w-4xl px-4">
         <header className="mb-10 text-center">
           <Typography className="mb-2 text-3xl md:text-4xl" variant="h1">
-            {locale === "fr" ? "Conditions Générales de Vente" : "General Terms of Sale"}
+            {locale === "fr" ? "Conditions Générales d'Utilisation" : "General Terms of Use"}
           </Typography>
           <p className="text-muted-foreground text-base md:text-lg">
             {locale === "fr"
-              ? "Les conditions qui régissent l’achat d’un abonnement Workout Cool."
-              : "The terms governing the purchase of a Workout Cool subscription."}
+              ? "Les conditions générales d'utilisation de Workout Cool."
+              : "The general terms of use for Workout Cool."}
           </p>
         </header>
 

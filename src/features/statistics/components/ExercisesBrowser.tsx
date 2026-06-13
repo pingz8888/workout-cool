@@ -17,10 +17,8 @@ import { EQUIPMENT_CONFIG } from "@/features/workout-builder/model/equipment-con
 import { WeightProgressionChart } from "@/features/statistics/components/WeightProgressionChart";
 import { VolumeChart } from "@/features/statistics/components/VolumeChart";
 import { TimeframeSelector } from "@/features/statistics/components/TimeframeSelector";
-import { StatisticsPreviewOverlay } from "@/features/statistics/components/StatisticsPreviewOverlay";
 import { OneRepMaxChart } from "@/features/statistics/components/OneRepMaxChart";
 import { ExerciseCharts } from "@/features/statistics/components/ExerciseStatisticsTab";
-import { useUserSubscription } from "@/features/ads/hooks/useUserSubscription";
 import { ExerciseWithAttributes } from "@/entities/exercise/types/exercise.types";
 import { getExerciseAttributesValueOf } from "@/entities/exercise/shared/muscles";
 import { SimpleSelect, SelectOption } from "@/components/ui/simple-select";
@@ -232,7 +230,6 @@ export const ExercisesBrowser = () => {
   const [showExerciseModal, setShowExerciseModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<StatisticsTimeframe>("8weeks");
-  const { isPremium } = useUserSubscription();
   const t = useI18n();
 
   const handleExerciseSelect = (exercise: ExerciseWithAttributes) => {
@@ -301,11 +298,6 @@ export const ExercisesBrowser = () => {
 
   const router = useRouter();
 
-  const handleUpgrade = () => {
-    router.push("/premium");
-    console.log("Upgrade clicked");
-  };
-
   return (
     <>
       {/* Conversion Banner */}
@@ -313,13 +305,11 @@ export const ExercisesBrowser = () => {
       <div className="min-h-screen">
         <div className="max-w-2xl mx-auto space-y-6">
           {/* Header */}
-          {isPremium && (
-            <div>
-              <button className="btn btn-primary w-full mb-6" onClick={openExerciseSelection}>
-                {t("statistics.select_exercise")}
-              </button>
-            </div>
-          )}
+          <div>
+            <button className="btn btn-primary w-full mb-6" onClick={openExerciseSelection}>
+              {t("statistics.select_exercise")}
+            </button>
+          </div>
 
           {/* Selected Exercise Info */}
           {selectedExercise && (
@@ -376,7 +366,6 @@ export const ExercisesBrowser = () => {
                   <WeightProgressionChart data={[]} height={250} unit="kg" />
                   <OneRepMaxChart data={[]} formula="Lombardi" formulaDescription="Classic 1RM estimation formula" height={250} unit="kg" />
                   <VolumeChart data={[]} height={250} />
-                  <StatisticsPreviewOverlay isVisible={!isPremium} onUpgrade={handleUpgrade} />
                 </div>
               )}
             </div>

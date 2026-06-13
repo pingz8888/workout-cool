@@ -18,7 +18,7 @@
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-192x192.png",
@@ -36,8 +36,9 @@
   "lang": "en",
   "name": "Workout Cool",
   "orientation": "portrait",
+  "prefer_related_applications": false,
   "scope": "/",
-  "short_name": "Workout Cool",
+  "short_name": "Workout",
   "start_url": "/",
   "theme_color": "#FF5722"
 }

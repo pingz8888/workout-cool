@@ -95,9 +95,8 @@ export default async function SessionDetailPage({ params }: SessionDetailPagePro
     headers: await headers(),
   });
 
-  // Pass authentication and premium status
+  // Pass authentication status
   const isAuthenticated = !!authSession?.user;
-  const isPremium = authSession?.user?.isPremium || false;
 
   const t = await getI18n();
   const sessionTitle = getSessionTitle(response.session, locale);
@@ -148,7 +147,6 @@ export default async function SessionDetailPage({ params }: SessionDetailPagePro
       <Breadcrumbs items={breadcrumbItems} />
       <ProgramSessionClient
         isAuthenticated={isAuthenticated}
-        isPremium={isPremium}
         program={response.program}
         session={response.session}
         week={response.week}

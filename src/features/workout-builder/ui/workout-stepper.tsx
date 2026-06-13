@@ -25,9 +25,7 @@ import { WorkoutSessionHeader } from "@/features/workout-session/ui/workout-sess
 import { DonationModal } from "@/features/workout-session/ui/donation-modal";
 import { useDonationModal } from "@/features/workout-session/hooks/use-donation-modal";
 import { WorkoutBuilderFooter } from "@/features/workout-builder/ui/workout-stepper-footer";
-import { env } from "@/env";
 import { Button } from "@/components/ui/button";
-import { HorizontalTopBanner, HorizontalBottomBanner } from "@/components/ads";
 
 export function WorkoutStepper() {
   const { loadSessionFromLocal } = useWorkoutSession();
@@ -199,12 +197,6 @@ export function WorkoutStepper() {
   if (isWorkoutActive && session) {
     return (
       <div className="w-full max-w-6xl mx-auto">
-        {(env.NEXT_PUBLIC_TOP_WORKOUT_SESSION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_WORKOUT_SESSION_PLACEMENT_ID) && (
-          <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_WORKOUT_SESSION_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_WORKOUT_SESSION_PLACEMENT_ID}
-          />
-        )}
         {!showCongrats && <WorkoutSessionHeader onQuitWorkout={quitWorkout} />}
         <WorkoutSessionSets isWorkoutActive={isWorkoutActive} onCongrats={handleCongrats} showCongrats={showCongrats} />
       </div>
@@ -274,77 +266,11 @@ export function WorkoutStepper() {
   };
 
   const renderBottomBanner = () => {
-    if (currentStep === 1 && (env.NEXT_PUBLIC_EQUIPMENT_SELECTION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_EQUIPMENT_SELECTION_PLACEMENT_ID)) {
-      return (
-        <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_EQUIPMENT_SELECTION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_EQUIPMENT_SELECTION_PLACEMENT_ID}
-        />
-      );
-    }
-    if (currentStep === 2 && (env.NEXT_PUBLIC_MUSCLE_SELECTION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_MUSCLE_SELECTION_PLACEMENT_ID)) {
-      return (
-        <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_MUSCLE_SELECTION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_MUSCLE_SELECTION_PLACEMENT_ID}
-        />
-      );
-    }
-    if (currentStep === 3 && (env.NEXT_PUBLIC_EXERCISE_SELECTION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_EXERCISES_SELECTION_PLACEMENT_ID)) {
-      return (
-        <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_EXERCISE_SELECTION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_EXERCISES_SELECTION_PLACEMENT_ID}
-        />
-      );
-    }
+    return null;
   };
 
   const renderTopBanner = () => {
-    if (currentStep === 1) {
-      // if (locale === "fr") {
-      //   return <NutripureAffiliateBanner />;
-      // }
-
-      if (env.NEXT_PUBLIC_TOP_STEPPER_STEP_1_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_1_PLACEMENT_ID) {
-        return (
-          <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_STEPPER_STEP_1_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_1_PLACEMENT_ID}
-          />
-        );
-      }
-    }
-
-    if (currentStep === 2) {
-      // if (locale === "fr") {
-      //   return <NutripureAffiliateBanner />;
-      // }
-
-      if (env.NEXT_PUBLIC_TOP_STEPPER_STEP_2_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_2_PLACEMENT_ID) {
-        return (
-          <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_STEPPER_STEP_2_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_2_PLACEMENT_ID}
-          />
-        );
-      }
-    }
-
-    if (currentStep === 3) {
-      // if (locale === "fr") {
-      //   return <NutripureAffiliateBanner />;
-      // }
-
-      if (env.NEXT_PUBLIC_TOP_STEPPER_STEP_3_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_3_PLACEMENT_ID) {
-        return (
-          <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_STEPPER_STEP_3_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_3_PLACEMENT_ID}
-          />
-        );
-      }
-    }
+    return null;
   };
 
   return (

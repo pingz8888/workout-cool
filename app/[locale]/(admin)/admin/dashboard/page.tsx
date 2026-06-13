@@ -6,7 +6,7 @@ import { prisma } from "@/shared/lib/prisma";
 import { Skeleton } from "@/components/ui/skeleton";
 
 async function getDashboardStats() {
-  const [totalUsers, totalWorkoutSessions, totalExercises, activeSubscriptions, recentUsers, recentWorkouts, totalPrograms] =
+  const [totalUsers, totalWorkoutSessions, totalExercises, recentUsers, recentWorkouts, totalPrograms] =
     await Promise.all([
       // Total users
       prisma.user.count(),
@@ -16,13 +16,6 @@ async function getDashboardStats() {
 
       // Total exercises
       prisma.exercise.count(),
-
-      // Active subscriptions
-      prisma.subscription.count({
-        where: {
-          status: "ACTIVE",
-        },
-      }),
 
       // Users created in last 7 days
       prisma.user.count({
@@ -50,7 +43,6 @@ async function getDashboardStats() {
     totalUsers,
     totalWorkoutSessions,
     totalExercises,
-    activeSubscriptions,
     recentUsers,
     recentWorkouts,
     totalPrograms,
@@ -160,8 +152,8 @@ async function DashboardStats() {
                 />
               </div>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">{stats.activeSubscriptions}</h3>
-            <p className="text-xs text-gray-600 dark:text-gray-300">Abonnés</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">{stats.totalExercises.toLocaleString()}</h3>
+            <p className="text-xs text-gray-600 dark:text-gray-300">Exercices</p>
           </div>
         </div>
       </div>

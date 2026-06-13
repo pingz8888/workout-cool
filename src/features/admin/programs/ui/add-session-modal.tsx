@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { generateSlugsForAllLanguages } from "@/shared/lib/slug";
 import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -31,7 +30,6 @@ const sessionSchema = z.object({
   descriptionRu: z.string().min(1, "La description en russe est requise"),
   descriptionZhCn: z.string().min(1, "La description en chinois est requise"),
   estimatedMinutes: z.number().min(5, "Au moins 5 minutes"),
-  isPremium: z.boolean(),
   equipment: z.array(z.nativeEnum(ExerciseAttributeValueEnum)),
 });
 
@@ -81,7 +79,6 @@ export function AddSessionModal({ open, onOpenChange, weekId, nextSessionNumber 
       descriptionRu: `Описание сессии ${nextSessionNumber}`,
       descriptionZhCn: `第${nextSessionNumber}节课程描述`,
       estimatedMinutes: 30,
-      isPremium: true,
       equipment: [],
     },
   });
@@ -260,15 +257,11 @@ export function AddSessionModal({ open, onOpenChange, weekId, nextSessionNumber 
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <Label htmlFor="estimatedMinutes">Durée estimée (minutes)</Label>
               <Input id="estimatedMinutes" min="5" type="number" {...register("estimatedMinutes", { valueAsNumber: true })} />
               {errors.estimatedMinutes && <p className="text-sm text-red-500 mt-1">{errors.estimatedMinutes.message}</p>}
-            </div>
-            <div className="flex items-center space-x-2 pt-8">
-              <Switch defaultChecked={true} id="isPremium" onCheckedChange={(checked) => setValue("isPremium", checked)} />
-              <Label htmlFor="isPremium">Séance premium</Label>
             </div>
           </div>
 

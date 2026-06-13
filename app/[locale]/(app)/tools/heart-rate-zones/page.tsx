@@ -10,9 +10,7 @@ import { HEART_RATE_ZONES_CONTENT } from "app/[locale]/(app)/tools/heart-rate-zo
 import { HEART_RATE_ZONES_SEO } from "app/[locale]/(app)/tools/heart-rate-zones/seo/config";
 import { calculateHeartRateZones } from "app/[locale]/(app)/tools/heart-rate-zones/lib/utils";
 import { getServerUrl } from "@/shared/lib/server-url";
-import { env } from "@/env";
 import { generateSEOMetadata, SEOScripts } from "@/components/seo/SEOHead";
-import { HorizontalBottomBanner, HorizontalTopBanner } from "@/components/ads";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -179,12 +177,6 @@ export default async function HeartRateZonesPage({ params }: { params: Promise<{
         type="application/ld+json"
       />
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
-        {(env.NEXT_PUBLIC_TOP_HEART_ZONES_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_HEART_ZONES_PLACEMENT_ID) && (
-          <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_HEART_ZONES_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_HEART_ZONES_PLACEMENT_ID}
-          />
-        )}
         <div className="container mx-auto px-2 sm:px-4 py-6 max-w-4xl relative z-10">
           {/* SEO-optimized header */}
           <div className="text-center mb-8">
@@ -201,12 +193,6 @@ export default async function HeartRateZonesPage({ params }: { params: Promise<{
             <SEOOptimizedContentServer />
           </div>
         </div>
-        {(env.NEXT_PUBLIC_BOTTOM_HEART_ZONES_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_BOTTOM_HEART_ZONES_PLACEMENT_ID) && (
-          <HorizontalBottomBanner
-            adSlot={env.NEXT_PUBLIC_BOTTOM_HEART_ZONES_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_BOTTOM_HEART_ZONES_PLACEMENT_ID}
-          />
-        )}
       </div>
     </>
   );

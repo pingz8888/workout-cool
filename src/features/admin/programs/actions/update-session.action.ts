@@ -29,7 +29,6 @@ interface UpdateSessionData {
   descriptionZhCn: string;
   equipment: ExerciseAttributeValueEnum[];
   estimatedMinutes: number;
-  isPremium: boolean;
 }
 
 export async function updateSession(data: UpdateSessionData) {
@@ -108,7 +107,6 @@ export async function updateSession(data: UpdateSessionData) {
       descriptionZhCn: data.descriptionZhCn,
       equipment: data.equipment,
       estimatedMinutes: data.estimatedMinutes,
-      isPremium: data.isPremium,
     },
   });
 

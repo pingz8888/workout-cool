@@ -35,9 +35,6 @@ export function SessionCard({ session }: SessionCardProps) {
                 <h4 className="font-semibold">
                   {t("programs.session")} {session.sessionNumber}: {session.title}
                 </h4>
-                <div className={`badge badge-sm ${session.isPremium ? "badge-primary" : "badge-outline"}`}>
-                  {session.isPremium ? "Premium" : "Gratuit"}
-                </div>
               </div>
               <p className="text-sm text-base-content/60">{session.description}</p>
               <div className="flex items-center gap-4 mt-2 text-sm text-base-content/60">

@@ -36,7 +36,6 @@ export interface PublicProgram {
   sessionsPerWeek: number;
   sessionDurationMin: number;
   equipment: string[];
-  isPremium: boolean;
   participantCount: number;
   totalWeeks: number;
   totalSessions: number;
@@ -72,8 +71,7 @@ export async function getPublicPrograms(): Promise<PublicProgram[]> {
         },
       },
       orderBy: [
-        { isPremium: "desc" }, // Premium d'abord
-        { createdAt: "desc" }, // Plus récents ensuite
+        { createdAt: "desc" },
       ],
     });
 
@@ -109,7 +107,6 @@ export async function getPublicPrograms(): Promise<PublicProgram[]> {
       sessionsPerWeek: program.sessionsPerWeek,
       sessionDurationMin: program.sessionDurationMin,
       equipment: program.equipment,
-      isPremium: program.isPremium,
       participantCount: program.participantCount,
       totalWeeks: program.weeks.length,
       totalSessions: program.weeks.reduce((acc, week) => acc + week.sessions.length, 0),

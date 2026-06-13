@@ -44,9 +44,6 @@ export function ProgramBuilder({ program }: ProgramBuilderProps) {
                 <p className="text-base-content/60 mb-3">{program.description}</p>
                 <div className="flex gap-2">
                   <VisibilityBadge currentVisibility={program.visibility} programId={program.id} />
-                  <div className={`badge ${program.isPremium ? "badge-primary" : "badge-secondary"}`}>
-                    {program.isPremium ? "Premium" : "Gratuit"}
-                  </div>
                   <div className="badge badge-outline">{program.level}</div>
                   <div className="badge badge-outline">{program.category}</div>
                 </div>

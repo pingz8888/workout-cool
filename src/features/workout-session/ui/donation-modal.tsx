@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Heart, X, Code, Server, Coffee, Github, Tv } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Heart, X, Code, Server, Coffee, Github } from "lucide-react";
 import { useI18n } from "locales/client";
 
 import { Button } from "@/components/ui/button";
@@ -14,14 +14,6 @@ interface DonationModalProps {
 export function DonationModal({ isOpen, onClose }: DonationModalProps) {
   const t = useI18n();
   const modalRef = useRef<HTMLDialogElement>(null);
-  const [adReady, setAdReady] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setAdReady(!!window.ezRewardedAds?.ready);
-    }
-  }, [isOpen]);
-
   useEffect(() => {
     const modal = modalRef.current;
     if (!modal) return;
@@ -54,15 +46,6 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
     window.open("https://github.com/sponsors/snouzy", "_blank");
     onClose();
   };
-
-  const handleWatchAd = useCallback(() => {
-    if (!window.ezRewardedAds?.ready) {
-      return;
-    }
-
-    onClose();
-    window.ezRewardedAds.requestAndShow(() => {});
-  }, [onClose]);
 
   return (
     <dialog className="modal modal-bottom sm:modal-middle" ref={modalRef} style={{ padding: 0 }}>
@@ -141,26 +124,6 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
         {/* Actions */}
         <div className="modal-action flex-shrink-0 mt-auto">
           <form className="flex gap-2 w-full flex-col" method="dialog">
-            {/* Watch Ad — free support option */}
-            {adReady && (
-              <>
-                <Button
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0"
-                  onClick={handleWatchAd}
-                  size="large"
-                  type="button"
-                >
-                  <Tv className="h-4 w-4 mr-2" />
-                  {t("donation_modal.watch_ad")}
-                </Button>
-                <div className="flex items-center gap-3">
-                  <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
-                  <span className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wide">{t("donation_modal.or")}</span>
-                  <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
-                </div>
-              </>
-            )}
-
             <p className="flex gap-2 flex-col sm:flex-row text-sm text-slate-600 dark:text-slate-400">{t("donation_modal.support_via")}</p>
             <div className="flex gap-2 flex-col sm:flex-row">
               <Button

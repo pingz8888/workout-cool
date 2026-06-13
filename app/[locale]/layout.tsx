@@ -203,10 +203,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
   viewportFit: "cover",
-  themeColor: "#FF5722",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FF5722" },
+    { media: "(prefers-color-scheme: dark)", color: "#18181b" },
+  ],
 };
 
 const inter = Inter({
@@ -222,7 +225,7 @@ const permanentMarker = Permanent_Marker({
   display: "swap",
 });
 
-export const preferredRegion = ["fra1", "sfo1", "iad1"];
+export const preferredRegion = ["iad1"];
 
 interface RootLayoutProps {
   params: Promise<{ locale: string }>;

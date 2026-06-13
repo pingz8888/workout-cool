@@ -42,12 +42,8 @@ export default {
     "set#one": "组",
     "set#other": "组",
     error_starting_session: "启动课程时出错",
-    premium_session: "高级课程",
-    premium_session_description: "这个课程是高级课程的一部分。您可以查看细节，但不能进行锻炼。",
-    premium_session_exercises: "包含的练习",
     workout_description: "课程描述",
     connect_to_access: "连接以访问",
-    become_premium: "成为高级",
     back_to_program: "返回程序",
     no_equipment: "没有设备",
     workout_programs_title: "锻炼程序 (+ 正在创建中)",
@@ -59,9 +55,6 @@ export default {
     auth_required_description: "您需要登录以访问此课程。",
     login_to_continue: "登录以继续",
     signup_to_continue: "注册以继续",
-    premium_required: "高级要求",
-    premium_required_description: "这是一个高级课程。升级以访问所有高级内容。",
-    upgrade_to_premium: "Upgrade to Premium",
     completed: "已完成",
     about: "关于",
     program: "程序",
@@ -79,7 +72,6 @@ export default {
     week: "周",
     exercises: "练习",
     min_short: "分钟",
-    premium: "高级",
     free: "免费",
     join_cta: "加入挑战",
     continue: "继续",
@@ -89,11 +81,9 @@ export default {
     copied_to_clipboard: "链接已复制！",
     share_failed: "分享失败",
     important_info: "重要信息",
-    donation_teaser:
-      "起初，我们依靠捐赠运营。但正如您所想，捐赠不足以支付开发和运营成本。因此，我们为您制作了一个套餐，这将帮助我们维持运营 — 并在此过程中解锁一些超能力。",
     new: "新",
     more_programs_coming_title: "更多课程即将推出！",
-    more_programs_coming_description: "我们正在努力创建新的课程。通过现在升级到高级版，您将自动获得所有课程。感谢您的支持。🚀",
+    more_programs_coming_description: "我们正在添加更多训练计划，敬请期待！",
     coming_strength: "力量 & 肌肉",
     coming_cardio: "有氧 HIIT",
     coming_yoga: "瑜伽 & 移动性",
@@ -110,341 +100,6 @@ export default {
     },
   },
 
-  premium: {
-    checkout_error: "结账时出错",
-    premium_required_title: "需要高级",
-    premium_required_subtitle: "这是一个高级访问。升级以访问所有高级内容。",
-    premium_required_button: "升级到高级",
-    already_premium: "您正在享受 Workout.cool Premium",
-    no_ads: "无广告",
-    upgrade: "升级",
-
-    // Checkout
-    checkout: {
-      processing: "处理中...",
-    },
-
-    // Pricing
-    pricing: {
-      month: "月",
-      year: "年",
-      monthly: "每月",
-      yearly: "每年",
-      discount: "-48%",
-    },
-
-    // Hero Section
-    hero: {
-      badge: "开源 & 自托管 始终免费",
-      title: "自由训练，支持使命",
-      subtitle: "对于那些相信这个项目并希望通过力量提升器来（重新）相信自己的人！",
-      stats: {
-        athletes: {
-          count: "12.4K+",
-          label: "活跃运动员",
-        },
-        series: {
-          count: "1.2M+",
-          label: "系列记录",
-        },
-        rating: {
-          count: "4.9/5",
-          label: "社区评分",
-        },
-        progression: {
-          count: "+23%",
-          label: "平均进展",
-        },
-      },
-
-      // Health Risks
-      health_risks: {
-        overweight: {
-          high_blood_pressure: "高血压",
-          ldl_cholesterol: "低密度脂蛋白胆固醇（坏胆固醇）水平升高",
-          hdl_cholesterol: "高密度脂蛋白胆固醇（好胆固醇）水平降低",
-          triglycerides: "甘油三酯水平升高",
-          type_2_diabetes: "2型糖尿病",
-          coronary_heart_disease: "冠心病",
-          stroke: "中风",
-          gallbladder_disease: "胆囊疾病",
-          osteoarthritis: "骨关节炎",
-          sleep_apnea: "睡眠呼吸暂停和呼吸问题",
-          certain_cancers: "某些癌症（子宫内膜癌、乳腺癌、结肠癌、肾癌、胆囊癌、肝癌）",
-          low_quality_life: "生活质量低下",
-          mental_illnesses: "精神疾病，如临床抑郁症和焦虑症",
-          body_pains: "身体疼痛和身体功能困难",
-          increased_mortality: "总体死亡风险增加",
-        },
-        underweight: {
-          malnutrition: "营养不良和维生素缺乏",
-          anemia: "贫血（血液携氧能力降低）",
-          osteoporosis: "骨质疏松症（骨折风险增加）",
-          immune_function: "免疫功能下降",
-          growth_development: "生长发育问题（特别是儿童）",
-          reproductive_issues: "女性因荷尔蒙失衡导致的生殖问题",
-          miscarriage_risk: "妊娠早期流产风险较高",
-          surgery_complications: "手术期间潜在并发症",
-          increased_mortality: "总体死亡风险增加",
-          underlying_conditions: "可能表明潜在的医疗状况",
-        },
-      },
-    },
-
-    // Educational Content
-    // Mission Banner
-    mission: {
-      supporters_count: "234",
-      supporters_text: "支持者帮助使命",
-      limited: "有限",
-      early_access: "早期访问",
-    },
-
-    // Plans
-    plans: {
-      monthly: "每月",
-      yearly: "每年",
-      yearly_discount: "-48%",
-      per_month: "/月",
-      per_year: "/year",
-
-      free: {
-        name: "免费",
-        price: "€0",
-        period: "/forever",
-        price_label: "€0/forever 永久",
-        badge: "开源 • 始终免费",
-        description: "所有基本功能",
-        features: ["生成带有视频的练习", "GitHub 风格的训练历史（6 个月）", "分享和重复训练（即将推出）", "自托管可能", "代码源可用"],
-        button: "您的实际计划",
-        footer_note: "无需注册 • 永久访问",
-      },
-
-      premium: {
-        name: "PREMIUM ⭐",
-        price_label: "€7.90/月或€49/年",
-        badge: "最受欢迎 • 给爱好者",
-        description: "所有功能 + 早期访问",
-        footer_monthly: "加入热情的社区！🔥",
-        footer_yearly: "感谢您的年度支持！🙏",
-        yearly_price_note: "/月",
-        features: [
-          "...所有免费计划",
-          "无广告",
-          "无限历史（与 6 个月免费相比）",
-          "跟踪进度，包括高级统计（体积、进展、PR）",
-          "预设计训练程序",
-          "私人 1:1 聊天与教练",
-          "早期访问新功能",
-        ],
-      },
-    },
-
-    // Buttons and Actions
-    actions: {
-      processing: "处理中...",
-      go_premium: "升级到高级",
-      sign_in_continue: "升级到高级",
-      upgrade_now: "立即升级",
-      current_plan: "您的实际计划",
-    },
-
-    // Trust Elements
-    trust: {
-      gdpr_compliant: "100% GDPR 合规",
-      money_back: "30天退款保证",
-      cancel_anytime: "1 点击取消，无承诺",
-      secure_payment: "100% 安全支付 via Stripe",
-    },
-
-    // Feature Comparison
-    comparison: {
-      title: "详细功能比较",
-      subtitle: "了解每个计划中包含的内容",
-      features_label: "功能",
-      headers: {
-        features: "功能",
-        free: "免费",
-        premium: "高级",
-      },
-      categories: {
-        equipment: "设备 & 练习",
-        tracking: "跟踪 & 分析",
-        programs: "程序 & AI",
-        community: "社区 & 分享",
-        support: "支持 & 项目",
-      },
-      features: {
-        exercise_library: "练习库",
-        custom_exercise: "自定义练习",
-        video_tutorials: "视频教程",
-        workout_history: "锻炼历史",
-        progress_statistics: "进展统计",
-        personal_records: "个人记录跟踪",
-        volume_analytics: "体积 & 进展分析",
-        predesigned_programs: "预设计程序",
-        personalized_recommendations: "个性化推荐",
-        pro_templates: "专业模板（举重、健美、等）",
-        community_access: "社区访问",
-        discord_community: "Discord 社区",
-        private_chat: "私人 1:1 聊天与教练",
-        community_support: "社区支持",
-        priority_support: "优先支持",
-        early_access: "早期访问功能",
-        beta_testing: "Beta 测试访问",
-      },
-      values: {
-        basic: "基本",
-        complete: "完整",
-        unlimited: "无限",
-        professional: "专业",
-        six_months: "6 个月",
-        limited: "有限",
-        all_programs: "所有程序",
-        public: "公开",
-        vip_access: "VIP 访问",
-        private_channels: "私人频道",
-        soon: "即将推出",
-        hd_slowmo: "4K + 慢动作",
-        early_access: "早期访问",
-      },
-    },
-
-    // FAQ
-    faq: {
-      title: "常见问题",
-      subtitle: "关于 Workout.cool 和我们的使命",
-      items: [
-        {
-          question: "为什么开源还要付费？",
-          answer:
-            "这是一个很好的问题！代码将始终保持免费，但维护服务器、数据库和基础设施需要成本。您的贡献帮助我们让工具免费提供给每个人。这是一个双赢的模式：您获得高级功能，社区保持免费访问！",
-        },
-        {
-          question: "我可以自托管 Workout.cool 吗？",
-          answer:
-            "当然可以！整个代码库在 MIT 许可证下可在 GitHub 上获得。您可以在自己的服务器上部署它，根据需要进行定制，并完全免费使用。自托管为您提供对数据和锻炼隐私的完全控制。",
-        },
-        {
-          question: "我的锻炼数据安全吗？",
-          answer:
-            "是的！我们符合 GDPR，使用加密连接，并安全存储您的数据。此外，由于我们是开源的，您可以审计我们的安全实践。您还可以随时导出数据或自托管以完全控制。",
-        },
-        {
-          question: "我可以随时取消订阅吗？",
-          answer:
-            "当然可以！没有合同，没有承诺。随时点击取消。您将保持访问权限，直到当前计费期结束，并且您可以随时稍后重新开始。即使您降级到免费，您的锻炼数据仍可访问。",
-        },
-        {
-          question: "有针对初学者的练习吗？",
-          answer:
-            "当然有！我们的练习库涵盖从完全初学者到高级运动员的所有健身水平。视频和说明帮助初学者找到合适的练习，我们的视频教程展示正确的形式。",
-        },
-        {
-          question: "进展跟踪如何工作？",
-          answer:
-            "每个组、重复、重量和时间都会自动记录。您会得到一个 GitHub 风格的锻炼历史，显示您的连贯性，以及详细的分析，包括体积、进展和个人记录。高级用户会得到高级图表和见解。",
-        },
-        {
-          question: "我可以从其他应用程序导入数据吗？",
-          answer:
-            "很快。我们将支持 CSV 导入基本数据（重复和重量）。如果您从另一个健身应用程序切换，我们的支持团队可以帮助迁移您的锻炼历史。",
-        },
-        {
-          question: "应用程序可以在离线状态下工作吗？",
-          answer:
-            "核心锻炼跟踪可以在离线状态下工作。您可以在没有互联网连接的情况下记录 10 次锻炼的组和重复。练习视频和云同步需要互联网连接。所有离线数据都会自动同步，当您再次在线时。",
-        },
-        {
-          question: "有针对女性的程序吗？",
-          answer:
-            "当然有！而且将来会有更多程序。我们正在努力。支持者和高级计划将包括所有未来的专门程序，用于不同的目标：力量、塑形、举重、健美等！",
-        },
-        {
-          question: "我可以创建自己的程序吗？",
-          answer: "不幸的是，不能。我们正在努力！",
-        },
-      ],
-      additional_support: {
-        title: "还有问题吗？",
-        description: "我们的健身社区在这里帮助您成功",
-        community: "社区支持（Discord 或 hello@workout.cool）",
-        discussions: "开放讨论（github/discord）",
-        roadmap: "透明路线图（github）",
-      },
-    },
-
-    // Final CTA
-    final_cta: {
-      motivation: "继续努力！💪",
-      title: "准备好支持使命吗？",
-      subtitle: "加入数千名相信开源训练自由的健身爱好者",
-      values: [
-        {
-          title: "社区优先",
-          description: "由健身社区构建和为健身社区构建",
-        },
-        {
-          title: "始终透明",
-          description: "开源代码，透明资金",
-        },
-        {
-          title: "爱的劳动",
-          description: "15 年的激情！",
-        },
-      ],
-      quote: {
-        text: "我们相信健身工具应该对每个人都是可访问的。您的支持帮助我们继续创新，同时保持这一愿景。",
-        author: "— Workout.cool 团队",
-      },
-    },
-
-    // Premium Active State
-    premium_active: {
-      title: "高级活跃！💪",
-      supporting: "支持使命",
-    },
-
-    // Legacy translations (keeping for compatibility)
-    premium_active_title: "高级活跃",
-    premium_active_subtitle: "所有功能解锁",
-    free_intro_title: "您已经免费获得很多了...",
-    free_intro_text:
-      "Workout.cool 是一个免费、开源的健身应用，每天有 60,000+ 用户使用。它是由爱（不是 VC 资金 ^^）构建的，并且为我们保持运行需要真实的时间和金钱。",
-    donation_story_text:
-      "起初，我们依靠捐赠运行。但正如您所想，捐赠不足以支付开发和运行成本。所以我们为您制作了一个包，将帮助我们保持灯光，并在路上解锁一些超级能力。",
-    health_upgrade_text: "如果 Workout.cool 帮助您提升健康，请考虑升级到高级：D ！",
-    unlock_features_text: "解锁高级功能 & 支持开源健身。",
-    invest_yourself_quote: "不要在健身和书籍上吝啬 — 投资于自己！",
-    support_mission: "支持使命",
-    best_value_badge: "最佳价值",
-    annual_plan: "年度",
-    monthly_plan: "每月",
-    discount_badge: "40% 折扣",
-    per_month: "/月",
-    feature_all_programs: "所有锻炼程序",
-    feature_progress_tracking: "进展跟踪",
-    coming_soon: "(即将推出)",
-    feature_future_updates: "所有未来程序 & 更新",
-    feature_priority_support: "优先支持",
-    save_yearly: "每年节省 40%",
-    processing: "处理中...",
-    cta_annual: "我想支持 + 节省 40%",
-    cta_monthly: "让我们解锁我的完整计划",
-    thank_supporting: "感谢您的支持。",
-    no_pressure: "没有压力。您可以随时升级。",
-    keep_pushing: "继续努力！huhu",
-    still_unsure: "还不确定？没关系。Workout.cool 将始终保持免费和开源。",
-    support_helps: "但如果你相信我们在构建的东西，并且你负担得起，你的支持将帮助 💚",
-    self_hosting: "自托管",
-    community: "社区",
-    mit_license: "MIT 许可证",
-    pricing_year: "年",
-    pricing_month: "月",
-    conversion_flow_title: "重定向...",
-    conversion_flow_message: "成功登录！重定向到结账...",
-    redirecting_to_checkout: "重定向到结账",
-  },
   breadcrumbs: {
     home: "首页",
   },
@@ -455,8 +110,6 @@ export default {
     programs_tooltip: "浏览课程",
     workouts: "锻炼",
     workouts_tooltip: "创建您的锻炼",
-    premium: "高级",
-    premium_tooltip: "成为高级",
     tools: "工具",
     tools_tooltip: "浏览工具",
     profile: "个人资料",
@@ -583,11 +236,6 @@ export default {
     },
   },
 
-  // Premium Upsell Alert
-  donation_alert: {
-    title: "使用 Workout.cool Premium 解锁高级功能",
-    or: "或",
-  },
 
   // Donation Modal
   donation_modal: {
@@ -599,16 +247,15 @@ export default {
     costs_description: "目前，捐赠甚至无法覆盖基本成本：服务器、身份验证、基础设施、数据库等。",
     open_source_title: "100% 开源",
     open_source_description: "这个应用完全免费且开源。不产生任何利润 - 这是一个激情项目，帮助社区和帮助人们锻炼。",
-    no_ads: "无广告",
     no_tracking: "无追踪",
+    no_ads: "无广告",
     impact_title: "您的影响",
     impact_3_euros: "• 即使 €3 也能覆盖 1 周的服务器费用",
     impact_support: "• 您的支持让应用对所有人保持免费",
     impact_footer: "每一笔捐赠，即使很小，都会产生真正的影响！🙏",
     later_button: "稍后",
     support_button: "支持项目",
-    watch_ad: "观看广告来支持我们",
-    or: "或",
+
   },
 
   // Contact Support
@@ -853,7 +500,6 @@ export default {
     },
   },
   commons: {
-    upgrade_to_premium: "成为高级",
     last_activity: "最近活动",
     registered_on: "注册于",
     just_now: "刚刚",
@@ -962,14 +608,9 @@ export default {
     satisfied: "满意",
     support: "支持",
     change_language: "更改语言",
-    subscription: "订阅",
-    manage_subscription: "管理订阅",
-    become_premium: "成为高级",
-    remove_ads: "移除广告",
     coming_soon: "即将推出",
     in_progress: "进行中",
     close: "关闭",
-    premium: "高级",
     free: "免费",
     new: "新",
     monday: "周一",
@@ -1129,6 +770,7 @@ export default {
       max_heart_rate_info: "通过负荷测试或最大努力训练测得的真实最大心率，比基于年龄的估算更精确。",
 
       results: {
+        overview: "心率区间概览",
         title: "您的心率区间",
         max_heart_rate: "最大心率",
         heart_rate_reserve: "心率储备",
@@ -1854,22 +1496,11 @@ export default {
     volume_calculation: "训练量 = 重量 × 次数 × 组数",
     last_updated: "最后更新：{date}",
 
-    // Premium
-    premium_required: "需要高级版才能访问统计数据",
 
-    // StatisticsPreviewOverlay
-    premium_statistics: "高级统计",
-    premium_statistics_description: "通过每个练习的高级分析，获得关于您健身之旅的详细见解。",
     total_volume: "总训练量",
     pr_increase: "PR 增加",
     weight_progress: "重量进展",
-    upgrade_now: "立即升级",
     rating: "4.8/5 评分",
-    no_ads: "无广告",
-    cancel_anytime: "随时取消",
-    preview_notice: "这只是预览！👀",
-    preview_description: "解锁完整访问权限，获得详细分析、进度跟踪和个性化见解。",
-    get_premium_access: "获得高级访问权限",
 
     // ExercisesBrowser
     all_equipment: "所有器械",
@@ -1881,6 +1512,14 @@ export default {
     primary_muscle_label: "主要肌肉：",
     unknown: "未知",
     no_image_available: "无可用图像",
+    premium_statistics: "高级统计",
+    premium_statistics_description: "解锁高级分析和个性化洞察，优化您的训练。",
+    upgrade_now: "立即升级",
+    no_ads: "无广告",
+    cancel_anytime: "随时取消",
+    preview_notice: "预览模式",
+    preview_description: "这是高级统计功能的预览。升级以访问所有数据。",
+    get_premium_access: "获取高级访问",
   },
   heatmap: {
     week_days_short: {
@@ -1916,12 +1555,6 @@ export default {
     sponsor_nutripure: "优质补剂，完全透明",
     sponsor_nutri_and_co: "让营养成为日常习惯",
     visit_sponsor: "访问",
-    rewarded_dialog_title: "准备好训练了吗？",
-    rewarded_dialog_subtitle: "观看短视频广告解锁训练 : 帮助Workout.cool保持免费。",
-    rewarded_watch_ad: "观看广告并开始",
-    rewarded_or: "或",
-    rewarded_go_premium: "永远告别广告",
-    rewarded_premium_hint: "Premium会员永远不看广告，立即开始训练",
     dialog_title: "您的品牌，被657K+健身爱好者看到",
     dialog_description: "Workout.cool是健身爱好者每天来构建其训练课程的地方。让您的品牌展现在他们面前。",
     // eslint-disable-next-line quotes
@@ -1937,12 +1570,10 @@ export default {
     top_countries: "主要国家",
     more_countries: "更多",
     similarweb_placeholder: "按国家的流量占比 — SimilarWeb",
-    pricing_starting_at: "起步价",
     month: "月",
     feature_logo_link: "您的Logo和链接展示在每个页面",
     feature_visitors: "304,133名独立访客看到您的品牌",
     feature_targeted: "70%男性，18-44岁——高意向健身购买者",
-    feature_premium_placement: "高级位置：侧边栏+文章内嵌横幅",
     feature_dofollow: "来自高权重域名的Dofollow反向链接 — 提升您的SEO",
     cta_book: "立即预留名额",
     cta_subtext: "随时可取消。支付后24小时内上线。",

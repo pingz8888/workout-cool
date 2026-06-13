@@ -84,7 +84,6 @@ export default async function ProgramDetailPageRoute({ params }: ProgramDetailPa
       sessionsPerWeek: program.sessionsPerWeek,
       sessionDurationMin: program.sessionDurationMin,
       equipment: program.equipment,
-      isPremium: program.isPremium,
       participantCount: program.participantCount,
       totalSessions: program.weeks.reduce((acc, week) => acc + week.sessions.length, 0),
       totalExercises: program.weeks.reduce(
