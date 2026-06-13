@@ -112,7 +112,10 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
         {exerciseDescription && (
           <div className="mb-4">
             <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-100 mb-2">Description</h4>
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{exerciseDescription}</p>
+            <div
+              className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed prose dark:prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: exerciseDescription }}
+            />
           </div>
         )}
 

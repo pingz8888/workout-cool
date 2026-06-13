@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Play, Shuffle, MoreVertical, Trash2, Info, Target } from "lucide-react";
 import { ExerciseAttributeNameEnum } from "@prisma/client";
 
-import { useI18n } from "locales/client";
+import { useCurrentLocale, useI18n } from "locales/client";
 import { getExerciseAttributesValueOf } from "@/entities/exercise/shared/muscles";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -25,6 +25,7 @@ interface ExerciseCardProps {
 
 export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: ExerciseCardProps) {
   const t = useI18n();
+  const locale = useCurrentLocale();
   const [imageError, setImageError] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
@@ -111,7 +112,7 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
               </TooltipTrigger>
               <TooltipContent className="max-w-xs" side="left">
                 <div className="space-y-2">
-                  <p className="text-sm">{exercise.introduction}</p>
+                  <p className="text-sm">{locale === "fr" ? exercise.introduction : exercise.introductionEn || exercise.introduction}</p>
                   {mechanicsTypeValue && (
                     <p className="text-xs text-slate-500">
                       <strong>Type:</strong> {mechanicsTypeValue.map((mt) => mt.replace("_", " ")).join(", ")}

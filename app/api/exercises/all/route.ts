@@ -102,6 +102,10 @@ export async function GET(request: NextRequest) {
         id: true,
         name: true,
         nameEn: true,
+        description: true,
+        descriptionEn: true,
+        introduction: true,
+        introductionEn: true,
         fullVideoUrl: true,
         fullVideoImageUrl: true,
         attributes: {
