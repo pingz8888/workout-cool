@@ -7,6 +7,7 @@ import { useCurrentLocale, useI18n } from "locales/client";
 import { getExerciseAttributesValueOf } from "@/entities/exercise/shared/muscles";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useYouTubeThumbnail } from "../hooks/use-youtube-thumbnail";
 
 import { ExerciseVideoModal } from "./exercise-video-modal";
 
@@ -25,7 +26,7 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
   const locale = useCurrentLocale();
   const modalRef = useRef<HTMLDialogElement>(null);
   const [showVideo, setShowVideo] = useState(false);
-  const [imageError, setImageError] = useState(false);
+  const { src: thumbnailSrc, handleError: handleImageError, isUnavailable } = useYouTubeThumbnail(exercise?.fullVideoImageUrl);
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -98,7 +99,7 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
           </div>
 
           {/* Image/Video Thumbnail */}
-          {exercise.fullVideoImageUrl && !imageError ? (
+          {thumbnailSrc && !isUnavailable ? (
             <div
               className="relative h-48 bg-gradient-to-br from-slate-200 to-slate-200 dark:from-slate-700 dark:to-slate-800 rounded-lg overflow-hidden mb-4 cursor-pointer"
               onClick={handleWatchVideo}
@@ -108,8 +109,8 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
                 className="object-cover"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                src={exercise.fullVideoImageUrl}
-                onError={() => setImageError(true)}
+                src={thumbnailSrc}
+                onError={handleImageError}
               />
               <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                 <Button className="bg-white/90 text-slate-900" size="small" variant="secondary">

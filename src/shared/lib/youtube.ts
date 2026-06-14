@@ -1,3 +1,44 @@
+// src/shared/lib/youtube.ts
+
+/**
+ * YouTube thumbnail quality levels, from highest to lowest resolution:
+ * - maxresdefault.jpg — 1280×720 (HD, not always available)
+ * - sddefault.jpg     — 640×480  (good, almost always available)
+ * - hqdefault.jpg     — 480×360  (decent, always available)
+ * - mqdefault.jpg     — 320×180  (low)
+ * - default.jpg       — 120×90   (tiny)
+ */
+const YOUTUBE_THUMBNAIL_QUALITIES = ["maxresdefault", "sddefault", "hqdefault"] as const;
+
+export type YouTubeThumbnailQuality = (typeof YOUTUBE_THUMBNAIL_QUALITIES)[number];
+
+/**
+ * Upgrades a YouTube thumbnail URL to a higher resolution variant.
+ * Replaces the quality suffix (e.g. hqdefault → maxresdefault) in the URL.
+ *
+ * @param url The original YouTube thumbnail URL (e.g. https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg)
+ * @param quality The desired quality level (defaults to maxresdefault for HD)
+ * @returns The upgraded URL, or the original URL if it doesn't match expected patterns
+ */
+export function getYouTubeThumbnailUrl(url: string, quality: YouTubeThumbnailQuality = "maxresdefault"): string {
+  if (!url) return url;
+  // Replace any known YouTube thumbnail quality suffix with the requested one
+  return url.replace(
+    /(img\.youtube\.com\/vi\/[^/]+\/)(maxresdefault|sddefault|hqdefault|mqdefault|default)(\.jpg)/,
+    `$1${quality}$3`
+  );
+}
+
+/**
+ * Returns the next lower quality level for YouTube thumbnail fallback.
+ * Returns null if we've exhausted all quality options.
+ */
+export function getNextThumbnailQuality(current: YouTubeThumbnailQuality): YouTubeThumbnailQuality | null {
+  const idx = YOUTUBE_THUMBNAIL_QUALITIES.indexOf(current);
+  if (idx < 0 || idx >= YOUTUBE_THUMBNAIL_QUALITIES.length - 1) return null;
+  return YOUTUBE_THUMBNAIL_QUALITIES[idx + 1];
+}
+
 // src/shared/lib/get-youtube-embed-url.ts
 
 interface YouTubeEmbedOptions {

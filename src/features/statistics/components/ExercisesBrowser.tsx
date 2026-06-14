@@ -14,6 +14,7 @@ import { StatisticsTimeframe } from "@/shared/constants/statistics";
 import { ExerciseVideoModal } from "@/features/workout-builder/ui/exercise-video-modal";
 import { WorkoutBuilderExerciseWithAttributes } from "@/features/workout-builder/types";
 import { EQUIPMENT_CONFIG } from "@/features/workout-builder/model/equipment-config";
+import { useYouTubeThumbnail } from "@/features/workout-builder/hooks/use-youtube-thumbnail";
 import { WeightProgressionChart } from "@/features/statistics/components/WeightProgressionChart";
 import { VolumeChart } from "@/features/statistics/components/VolumeChart";
 import { TimeframeSelector } from "@/features/statistics/components/TimeframeSelector";
@@ -22,6 +23,30 @@ import { ExerciseCharts } from "@/features/statistics/components/ExerciseStatist
 import { ExerciseWithAttributes } from "@/entities/exercise/types/exercise.types";
 import { getExerciseAttributesValueOf } from "@/entities/exercise/shared/muscles";
 import { SimpleSelect, SelectOption } from "@/components/ui/simple-select";
+
+// Small helper component that uses the HD thumbnail hook
+const ExerciseThumbnailImg: React.FC<{
+  alt: string;
+  originalUrl: string;
+  className?: string;
+  height: number;
+  width: number;
+  onClick?: () => void;
+}> = ({ alt, originalUrl, className, height, width, onClick }) => {
+  const { src, handleError, isUnavailable } = useYouTubeThumbnail(originalUrl);
+  if (!src || isUnavailable) return null;
+  return (
+    <Image
+      alt={alt}
+      className={className ?? "object-cover h-full w-full scale-150"}
+      height={height}
+      onError={handleError}
+      src={src}
+      width={width}
+      onClick={onClick}
+    />
+  );
+};
 
 // API service for fetching exercises
 const fetchExercises = async (params: { page?: number; limit?: number; search?: string; muscle?: string; equipment?: string }) => {
@@ -202,11 +227,10 @@ const ExerciseSelectionModal: React.FC<{
                 >
                   <div className="w-16 h-16 bg-base-200 rounded-full flex items-center justify-center overflow-hidden border border-gray-400 dark:border-gray-600">
                     {exercise.fullVideoImageUrl && (
-                      <Image
+                      <ExerciseThumbnailImg
                         alt={locale === "fr" ? exercise.name : exercise.nameEn || exercise.name}
-                        className="object-cover h-full w-full scale-150"
+                        originalUrl={exercise.fullVideoImageUrl}
                         height={64}
-                        src={exercise.fullVideoImageUrl}
                         width={64}
                       />
                     )}
@@ -333,12 +357,12 @@ export const ExercisesBrowser = () => {
               <div className="bg-base-200 rounded-lg p-4 mb-4">
                 <div className="max-h-48 bg-base-200 rounded-lg flex items-center justify-center overflow-hidden aspect-video border border-gray-400 dark:border-gray-700">
                   {selectedExercise.fullVideoImageUrl ? (
-                    <Image
+                    <ExerciseThumbnailImg
                       alt={locale === "fr" ? selectedExercise.name : selectedExercise.nameEn || selectedExercise.name}
+                      originalUrl={selectedExercise.fullVideoImageUrl}
                       className="object-cover cursor-pointer aspect-video scale-115 justify-center place-self-center"
                       height={200}
                       onClick={openVideoModal}
-                      src={selectedExercise.fullVideoImageUrl}
                       width={300}
                     />
                   ) : (

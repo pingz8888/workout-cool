@@ -11,6 +11,7 @@ import type { ExerciseWithAttributes } from "../types";
 
 import useBoolean from "@/shared/hooks/useBoolean";
 import { Button } from "@/components/ui/button";
+import { useYouTubeThumbnail } from "../hooks/use-youtube-thumbnail";
 
 const MUSCLE_CONFIGS: Record<string, string> = {
   ABDOMINALS: "bg-red-500",
@@ -29,6 +30,7 @@ export function ExerciseListItemOverlay({ exercise, muscle }: { exercise: Exerci
   const locale = useCurrentLocale();
   const exerciseName = locale === "fr" ? exercise.name : exercise.nameEn;
   const muscleColor = MUSCLE_CONFIGS[muscle] || "bg-gray-500";
+  const { src: overlayThumbSrc, handleError: overlayHandleError, isUnavailable: overlayUnavailable } = useYouTubeThumbnail(exercise.fullVideoImageUrl);
 
   return (
     <div
@@ -36,14 +38,15 @@ export function ExerciseListItemOverlay({ exercise, muscle }: { exercise: Exerci
       style={{ scale: "1.03", opacity: 0.95 }}
     >
       <GripVertical className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 animate-pulse" />
-      {exercise.fullVideoImageUrl && (
+      {overlayThumbSrc && !overlayUnavailable && (
         <div className="relative h-8 w-8 sm:h-10 sm:w-10 rounded overflow-hidden shrink-0 bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50">
           <Image
             alt={exerciseName ?? ""}
             className="w-full h-full object-cover scale-[1.5]"
             height={32}
             loading="lazy"
-            src={exercise.fullVideoImageUrl}
+            onError={overlayHandleError}
+            src={overlayThumbSrc}
             width={32}
           />
         </div>
@@ -84,6 +87,7 @@ export const ExerciseListItem = React.memo(function ExerciseListItem({
   const locale = useCurrentLocale();
   const playVideo = useBoolean();
   const [modalTab, setModalTab] = useState<"video" | "statistics">("video");
+  const { src: itemThumbSrc, handleError: itemHandleError, isUnavailable: itemUnavailable } = useYouTubeThumbnail(exercise.fullVideoImageUrl);
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: exercise.id,
@@ -141,7 +145,7 @@ export const ExerciseListItem = React.memo(function ExerciseListItem({
             <GripVertical className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 transition-colors group-hover:text-slate-500" />
           </div>
 
-          {exercise.fullVideoImageUrl && (
+          {itemThumbSrc && !itemUnavailable && (
             <div
               className="relative h-8 w-8 sm:h-10 sm:w-10 rounded overflow-hidden shrink-0 bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700/50"
               onClick={() => { setModalTab("video"); playVideo.setTrue(); }}
@@ -151,7 +155,8 @@ export const ExerciseListItem = React.memo(function ExerciseListItem({
                 className="w-full h-full object-cover scale-[1.5]"
                 height={32}
                 loading="lazy"
-                src={exercise.fullVideoImageUrl}
+                onError={itemHandleError}
+                src={itemThumbSrc}
                 width={32}
               />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">

@@ -13,8 +13,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useYouTubeThumbnail } from "@/features/workout-builder/hooks/use-youtube-thumbnail";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+
+// Small helper component for HD thumbnails
+function ExerciseSelectionThumbnail({ originalUrl, alt }: { originalUrl: string; alt: string }) {
+  const { src, handleError, isUnavailable } = useYouTubeThumbnail(originalUrl);
+  if (!src || isUnavailable) return null;
+  return (
+    <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-700">
+      <Image alt={alt} className="object-cover" fill onError={handleError} src={src} />
+    </div>
+  );
+}
 
 const exerciseService = {
   async getAllExercises(params: { page?: number; limit?: number; search?: string; muscle?: string }) {
@@ -84,9 +96,7 @@ export const ExerciseSelection: React.FC<ExerciseSelectionProps> = ({ open, onOp
         >
           <div className="flex-1 flex items-center gap-4 cursor-pointer" onClick={() => handleExercisePress(exercise)}>
             {exercise.fullVideoImageUrl && (
-              <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-700">
-                <Image alt={exercise.name} className="object-cover" fill src={exercise.fullVideoImageUrl} />
-              </div>
+              <ExerciseSelectionThumbnail originalUrl={exercise.fullVideoImageUrl} alt={exercise.name} />
             )}
             <div className="flex-1">
               <h3 className="font-medium text-slate-900 dark:text-slate-100 mb-1">{exercise.name}</h3>

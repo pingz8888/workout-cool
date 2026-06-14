@@ -13,6 +13,29 @@ import { getExercisesByMuscleAction } from "../actions/get-exercises-by-muscle.a
 
 import { FavoriteButton } from "@/features/workout-builder/ui/favorite-button";
 import { useFavoritesModal } from "@/features/workout-builder/hooks/use-favorites-modal";
+import { useYouTubeThumbnail } from "@/features/workout-builder/hooks/use-youtube-thumbnail";
+
+// Small helper component for HD thumbnails in add exercise modal
+function AddExerciseThumbnail({ originalUrl, alt, variant }: { originalUrl: string; alt: string; variant?: "default" | "done" }) {
+  const { src, handleError, isUnavailable } = useYouTubeThumbnail(originalUrl);
+  if (!src || isUnavailable) return null;
+  const borderClass = variant === "done"
+    ? "border-2 border-gray-400 dark:border-gray-600 group-hover:border-green-400 group-hover:shadow-lg"
+    : "border-2 border-yellow-200 dark:border-yellow-600 group-hover:border-yellow-400 group-hover:shadow-lg";
+  return (
+    <div className={`relative h-16 w-16 rounded-xl overflow-hidden shrink-0 bg-gray-100 dark:bg-gray-700 ${borderClass} transition-all duration-200`}>
+      <Image
+        alt={alt}
+        className="w-full h-full object-cover scale-[1.5]"
+        height={64}
+        loading="lazy"
+        onError={handleError}
+        src={src}
+        width={64}
+      />
+    </div>
+  );
+}
 
 interface AddExerciseModalProps {
   isOpen: boolean;
@@ -195,16 +218,7 @@ export const AddExerciseModal = ({ isOpen, onClose, selectedEquipment }: AddExer
                               {/* Image de l'exercice avec bordure colorée */}
                               <div className="relative">
                                 {exercise.fullVideoImageUrl && (
-                                  <div className="relative h-16 w-16 rounded-xl overflow-hidden shrink-0 bg-gray-100 dark:bg-gray-700 border-2 border-yellow-200 dark:border-yellow-600 group-hover:border-yellow-400 group-hover:shadow-lg transition-all duration-200">
-                                    <Image
-                                      alt={exercise.nameEn || ""}
-                                      className="w-full h-full object-cover scale-[1.5]"
-                                      height={64}
-                                      loading="lazy"
-                                      src={exercise.fullVideoImageUrl}
-                                      width={64}
-                                    />
-                                  </div>
+                                  <AddExerciseThumbnail originalUrl={exercise.fullVideoImageUrl} alt={exercise.nameEn || ""} />
                                 )}
                               </div>
 
@@ -300,16 +314,7 @@ export const AddExerciseModal = ({ isOpen, onClose, selectedEquipment }: AddExer
                               {/* Image de l'exercice avec bordure colorée */}
                               <div className="relative">
                                 {exercise.fullVideoImageUrl && (
-                                  <div className="relative h-16 w-16 rounded-xl overflow-hidden shrink-0 bg-gray-100 dark:bg-gray-700 border-2 border-gray-400 dark:border-gray-600 group-hover:border-green-400 group-hover:shadow-lg transition-all duration-200">
-                                    <Image
-                                      alt={exercise.nameEn}
-                                      className="w-full h-full object-cover scale-[1.5]"
-                                      height={64}
-                                      loading="lazy"
-                                      src={exercise.fullVideoImageUrl}
-                                      width={64}
-                                    />
-                                  </div>
+                                  <AddExerciseThumbnail originalUrl={exercise.fullVideoImageUrl} alt={exercise.nameEn} variant="done" />
                                 )}
                                 {/* Badge de réussite */}
                                 <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">

@@ -10,6 +10,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useYouTubeThumbnail } from "../hooks/use-youtube-thumbnail";
 
 import { ExerciseVideoModal } from "./exercise-video-modal";
 
@@ -26,8 +27,8 @@ interface ExerciseCardProps {
 export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: ExerciseCardProps) {
   const t = useI18n();
   const locale = useCurrentLocale();
-  const [imageError, setImageError] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const { src: thumbnailSrc, handleError: handleImageError, isUnavailable } = useYouTubeThumbnail(exercise.fullVideoImageUrl);
 
   // Extraire les attributs utiles
   const equipmentAttributes = getExerciseAttributesValueOf(exercise, ExerciseAttributeNameEnum.EQUIPMENT);
@@ -44,16 +45,16 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
         <CardHeader className="relative p-0">
           {/* Image/Vidéo thumbnail */}
           <div className="relative h-48 bg-gradient-to-br from-slate-200 to-slate-200 dark:from-slate-700 dark:to-slate-800">
-            {exercise.fullVideoImageUrl && !imageError ? (
+            {thumbnailSrc && !isUnavailable ? (
               <>
                 <Image
                   alt={locale === "fr" ? exercise.name : exercise.nameEn || exercise.name}
                   className="object-cover transition-transform group-hover:scale-105"
                   fill
                   loading="lazy"
-                  onError={() => setImageError(true)}
+                  onError={handleImageError}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  src={exercise.fullVideoImageUrl}
+                  src={thumbnailSrc}
                 />
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <Button className="bg-white/90 text-slate-900" onClick={handlePlayVideo} size="small" variant="secondary">

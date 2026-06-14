@@ -17,7 +17,34 @@ import { useWorkoutSession } from "@/features/workout-session/model/use-workout-
 import { useSyncWorkoutSessions } from "@/features/workout-session/model/use-sync-workout-sessions";
 import { ExerciseVideoModal } from "@/features/workout-builder/ui/exercise-video-modal";
 import { useSyncFavoriteExercises } from "@/features/workout-builder/hooks/use-sync-favorite-exercises";
+import { useYouTubeThumbnail } from "@/features/workout-builder/hooks/use-youtube-thumbnail";
 import { Button } from "@/components/ui/button";
+
+// Small helper component for HD thumbnails in workout session
+function SessionExerciseThumbnail({ originalUrl, exerciseName, onClick }: { originalUrl: string; exerciseName: string | null; onClick: () => void }) {
+  const { src, handleError, isUnavailable } = useYouTubeThumbnail(originalUrl);
+  if (!src || isUnavailable) return null;
+  return (
+    <div
+      className="relative aspect-video max-w-24 rounded-lg overflow-hidden shrink-0 bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 cursor-pointer"
+      onClick={(e) => { e.stopPropagation(); onClick(); }}
+    >
+      <Image
+        alt={exerciseName || "Exercise image"}
+        className="w-full h-full object-cover scale-[1.35]"
+        height={48}
+        onError={handleError}
+        src={src}
+        width={48}
+      />
+      <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+        <Button className="bg-white/80" size="icon" variant="ghost">
+          <Play className="h-4 w-4 text-blue-600" />
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 export function WorkoutSessionSets({
   showCongrats,
@@ -166,26 +193,7 @@ export function WorkoutSessionSets({
               {/* Image + nom de l'exercice */}
               <div className="flex items-center gap-3 ml-2 hover:opacity-80">
                 {details?.fullVideoImageUrl && (
-                  <div
-                    className="relative aspect-video max-w-24 rounded-lg overflow-hidden shrink-0 bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setVideoModal({ open: true, exerciseId: ex.id });
-                    }}
-                  >
-                    <Image
-                      alt={exerciseName || "Exercise image"}
-                      className="w-full h-full object-cover scale-[1.35]"
-                      height={48}
-                      src={details.fullVideoImageUrl}
-                      width={48}
-                    />
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-                      <Button className="bg-white/80" size="icon" variant="ghost">
-                        <Play className="h-4 w-4 text-blue-600" />
-                      </Button>
-                    </div>
-                  </div>
+                  <SessionExerciseThumbnail originalUrl={details.fullVideoImageUrl} exerciseName={exerciseName} onClick={() => setVideoModal({ open: true, exerciseId: ex.id })} />
                 )}
                 <div
                   className={cn(
