@@ -476,12 +476,23 @@
    ============================================ */
 
 /* Safe area insets — prevents content hiding behind
-   iPhone notch, Dynamic Island, and home indicator */
+   iPhone notch, Dynamic Island, and home indicator.
+   Applied directly to Header and BottomNavigation components
+   instead of body, because fixed/sticky positioned elements
+   ignore body padding. */
 body {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+
+/* iOS safe area — top navbar */
+.ios-safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* iOS safe area — bottom nav bar */
+.ios-safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Fix tap delay on iOS Safari interactive elements */
