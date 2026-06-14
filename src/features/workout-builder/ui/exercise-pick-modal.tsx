@@ -25,6 +25,7 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
   const locale = useCurrentLocale();
   const modalRef = useRef<HTMLDialogElement>(null);
   const [showVideo, setShowVideo] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -97,7 +98,7 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
           </div>
 
           {/* Image/Video Thumbnail */}
-          {exercise.fullVideoImageUrl ? (
+          {exercise.fullVideoImageUrl && !imageError ? (
             <div
               className="relative h-48 bg-gradient-to-br from-slate-200 to-slate-200 dark:from-slate-700 dark:to-slate-800 rounded-lg overflow-hidden mb-4 cursor-pointer"
               onClick={handleWatchVideo}
@@ -108,6 +109,7 @@ export function ExercisePickModal({ exercise, muscle, isOpen, onClose, onConfirm
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 src={exercise.fullVideoImageUrl}
+                onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                 <Button className="bg-white/90 text-slate-900" size="small" variant="secondary">

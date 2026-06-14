@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.facebook.com" },
       { protocol: "https", hostname: "api.dicebear.com" },
       { protocol: "https", hostname: "**.vercel.app" },
+      { protocol: "https", hostname: "img.youtube.com" },
+      { protocol: "https", hostname: "i.ytimg.com" },
     ],
   },
   async headers() {
