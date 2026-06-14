@@ -108,6 +108,8 @@ export async function GET(request: NextRequest) {
         introductionEn: true,
         fullVideoUrl: true,
         fullVideoImageUrl: true,
+        slug: true,
+        slugEn: true,
         attributes: {
           select: {
             id: true,

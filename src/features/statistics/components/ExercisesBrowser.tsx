@@ -8,7 +8,7 @@ import debounce from "lodash.debounce";
 import { useQuery } from "@tanstack/react-query";
 import { ExerciseAttributeNameEnum, ExerciseAttributeValueEnum } from "@prisma/client";
 
-import { useI18n } from "locales/client";
+import { useCurrentLocale, useI18n } from "locales/client";
 import { getAttributeValueLabel } from "@/shared/lib/attribute-value-translation";
 import { StatisticsTimeframe } from "@/shared/constants/statistics";
 import { ExerciseVideoModal } from "@/features/workout-builder/ui/exercise-video-modal";
@@ -68,6 +68,7 @@ const ExerciseSelectionModal: React.FC<{
   const [selectedEquipment, setSelectedEquipment] = useState<string>("ALL");
   const [selectedMuscle, setSelectedMuscle] = useState<string>("ALL");
   const t = useI18n();
+  const locale = useCurrentLocale();
 
   // Prepare equipment options
   const equipmentOptions: SelectOption[] = [
@@ -202,7 +203,7 @@ const ExerciseSelectionModal: React.FC<{
                   <div className="w-16 h-16 bg-base-200 rounded-full flex items-center justify-center overflow-hidden border border-gray-400 dark:border-gray-600">
                     {exercise.fullVideoImageUrl && (
                       <Image
-                        alt={exercise.name || ""}
+                        alt={locale === "fr" ? exercise.name : exercise.nameEn || exercise.name}
                         className="object-cover h-full w-full scale-150"
                         height={64}
                         src={exercise.fullVideoImageUrl}
@@ -211,7 +212,7 @@ const ExerciseSelectionModal: React.FC<{
                     )}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold">{exercise.name}</h4>
+                    <h4 className="font-semibold">{locale === "fr" ? exercise.name : exercise.nameEn || exercise.name}</h4>
                     <p className="text-sm text-gray-500">{primaryMuscleLabel}</p>
                   </div>
                 </div>
@@ -231,6 +232,7 @@ export const ExercisesBrowser = () => {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<StatisticsTimeframe>("8weeks");
   const t = useI18n();
+  const locale = useCurrentLocale();
 
   const handleExerciseSelect = (exercise: ExerciseWithAttributes) => {
     setSelectedExercise(exercise);
@@ -314,7 +316,7 @@ export const ExercisesBrowser = () => {
           {/* Selected Exercise Info */}
           {selectedExercise && (
             <div className="bg-base-100 rounded-lg p-6">
-              <h2 className="text-2xl font-bold mb-4">{selectedExercise.name}</h2>
+              <h2 className="text-2xl font-bold mb-4">{locale === "fr" ? selectedExercise.name : selectedExercise.nameEn || selectedExercise.name}</h2>
 
               <div className="flex flex-col gap-2 mb-4">
                 <div className="flex items-center gap-2">
@@ -332,7 +334,7 @@ export const ExercisesBrowser = () => {
                 <div className="max-h-48 bg-base-200 rounded-lg flex items-center justify-center overflow-hidden aspect-video border border-gray-400 dark:border-gray-700">
                   {selectedExercise.fullVideoImageUrl ? (
                     <Image
-                      alt={selectedExercise.name}
+                      alt={locale === "fr" ? selectedExercise.name : selectedExercise.nameEn || selectedExercise.name}
                       className="object-cover cursor-pointer aspect-video scale-115 justify-center place-self-center"
                       height={200}
                       onClick={openVideoModal}

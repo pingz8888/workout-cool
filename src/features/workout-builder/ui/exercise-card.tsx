@@ -47,7 +47,7 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
             {exercise.fullVideoImageUrl && !imageError ? (
               <>
                 <Image
-                  alt={exercise.name}
+                  alt={locale === "fr" ? exercise.name : exercise.nameEn || exercise.name}
                   className="object-cover transition-transform group-hover:scale-105"
                   fill
                   loading="lazy"
@@ -103,7 +103,7 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
         <CardContent className="p-4">
           {/* Titre de l'exercice */}
           <div className="flex items-start justify-between mb-3">
-            <h4 className="font-semibold text-slate-900 dark:text-slate-200 text-sm leading-tight line-clamp-2">{exercise.name}</h4>
+            <h4 className="font-semibold text-slate-900 dark:text-slate-200 text-sm leading-tight line-clamp-2">{locale === "fr" ? exercise.name : exercise.nameEn || exercise.name}</h4>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button className="h-8 w-8 ml-2 flex-shrink-0" size="small" variant="ghost">
